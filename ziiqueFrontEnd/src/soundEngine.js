@@ -1,39 +1,72 @@
-import * as Tone from 'tone'
-import {Context, now, Time, Transport} from 'tone'
 import {repeat} from "rxjs";
+import {Howl, Howler} from 'howler';
 
-const multplayer = new Tone.Players({
-  urls: {
-    kick: './assets/samples/Hard_Kick.mp3',
-    bass: './assets/samples/808.mp3',
-    hihat: './assets/samples/Hihat.mp3',
-    ride: './assets/samples/Ride.mp3',
-    snare: './assets/samples/Snare__Claps.mp3',
+var newsound = new Howl({
+  src: ['./assets/samples/Hard_Kick.mp3', './assets/samples/808.mp3'],
+  sprite: {
+    kick: [0, 1000],
+    bass: [1, 1000]
   }
-}).toDestination();
+})
+
+var kick = new Howl({
+  src: ['./assets/samples/Hard_Kick.mp3'],
+  sprite: {
+    kick: [0, 1000],
+  }
+});
+
+var bass = new Howl({
+  src: [ './assets/samples/808.mp3' ],
+  sprite: {
+    bass: [0, 1000],
+  }
+});
+
+var hihat = new Howl({
+  src: ['./assets/samples/Hihat.mp3'],
+  sprite: {
+    hihat: [0, 1000],
+  }
+});
+
+var ride = new Howl({
+  src: ['./assets/samples/Ride.mp3'],
+  sprite: {
+    ride: [0, 1000],
+  }
+});
+
+var snare = new Howl({
+  src: ['./assets/samples/Snare__Claps.mp3'],
+  sprite: {
+    snare: [0, 1000],
+  }
+});
+
+let soundBank = [];
 
 
 
 
 export function demoNode(x)
 {
-  console.log(multplayer.loaded);
   switch (x)
   {
     case x="A":
-      multplayer.player('kick').start(now());
+      newsound.play('kick', false)
      break;
     case x="B":
-      multplayer.player('bass').start(now());
+      newsound.play('bass', false)
       break;
     case x="C":
-      multplayer.player('hihat').start(now());
+      hihat.play('hihat', false)
       break;
     case x="D":
-      multplayer.player('ride').start(now());
+      ride.play('ride', false)
       break;
     case x="E":
-      multplayer.player('snare').start(now());
+      snare.play('snare', false)
       break;
   }
 }
@@ -44,20 +77,26 @@ function generateNote(note, bpm)
   switch (s)
   {
     case "A":
-      multplayer.player('kick').start( now() +generateTime(bpm, note)).sync();
-      console.log('CheckA')
+      var sound = new Howl({
+        src: ['./assets/samples/Hard_Kick.mp3'],
+        sprite: {
+          sound: [500, generateTime(bpm, note)]
+        }
+      });
+      soundBank.push(sound)
       break;
     case "B":
-      multplayer.player('bass').start(now() +generateTime(bpm, note)).sync();
+      var sound = new Howl({
+        src: [ './assets/samples/808.mp3' ],
+      });
+
+      soundBank.push(sound)
       break;
     case "C":
-      multplayer.player('hihat').start(now() + generateTime(bpm, note)).sync();
       break;
     case "D":
-      multplayer.player('ride').start(now() +generateTime(bpm, note)).sync();
       break;
     case "E":
-      multplayer.player('snare').start(now() +generateTime(bpm, note)).sync();
       break;
   }
 }
@@ -84,7 +123,7 @@ function generateTime(bpm, note)
   posNum = Number(splitNote)
 
   posR = 1 / bps
-  result = posR * posNum
+  result = posR * posNum * 1000
   console.log(result)
   return result
 }
@@ -121,19 +160,21 @@ let beating = false;
 
 export function startBeating(Seq, bpm){
 
-  if (!beating && Tone.loaded())
+  if (!beating)
   {
   for (let note in Seq) {
     generateNote(Seq[note], bpm)
+    for (let i = 0; i < soundBank.length; i++) {
+      console.log(soundBank[i])
+      soundBank[i].play('sound')
+    }
     console.log("startBeating: " + Seq[note])
-    Tone.Transport.start(now())
     beating = true;
   }
   }
 
   else {
-    Tone.Transport.stop(now())
-    console.log(multplayer.state)
+
   beating = false}
 }
 /*
