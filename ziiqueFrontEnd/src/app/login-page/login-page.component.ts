@@ -13,7 +13,7 @@ import {empty} from "rxjs";
 })
 export class LoginPageComponent implements OnInit {
   password: any;
-  username: any;
+  Username_Email: any;
   cpassword: any;
   strengthvalue: any;
   isEmailTrue: any;
@@ -37,14 +37,14 @@ export class LoginPageComponent implements OnInit {
 
   async Submit() {
     var loading = document.getElementById("loading-img");
-    if (!this.username) {
+    if (!this.Username_Email) {
       this.snackbar.open("Remember to enter either your email or username", "Ok")
     }
     else if (!this.password) {
       this.snackbar.open("Remember to enter your password", "Ok")
     } else{
       let dto = {
-        username: this.username,
+        Username_Email: this.Username_Email,
         password: this.password
 
       }
@@ -64,7 +64,7 @@ export class LoginPageComponent implements OnInit {
       if(this.password == this.cpassword){
         if(EmailValidator.validate(this.email)){
           let dto = {
-            username: this.username,
+            username: this.Username_Email,
             email: this.email,
             password: this.password,
             is2FA: false
