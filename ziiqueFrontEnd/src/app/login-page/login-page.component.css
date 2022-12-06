@@ -1,0 +1,165 @@
+.form-box{
+  top: 100px;
+  width: 380px;
+  height: 525px;
+  position: relative;
+  margin: auto;
+  background: rgba(255,255,255);
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.switch-button{
+  top: 0px;
+  width: 220px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #B4D9FB;
+  border-radius: 30px;
+}
+.toogle-btn{
+  padding: 10px 33px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+}
+
+.password-Strength{
+  top: -200px !important;
+  margin: auto;
+}
+
+#btn-login{
+  color: white;
+}
+#btn-register{
+  left: 5px;
+  color: black;
+}
+
+#btn{
+  top: 0px;
+  left: 0;
+  position: absolute;
+  width: 110px;
+  height: 100%;
+  background: linear-gradient(to right, #cf03dc, #0191f1);
+  border-radius: 30px;
+  transition: .5s;
+}
+.input-group{
+  top: 80px;
+  position: absolute;
+  width: 280px;
+  transition: .5s;
+}
+.input-field{
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label when clicked*/
+  color: #0191f1 !important;
+}
+
+::ng-deep .mat-form-field-label{
+  /*change color of label*/
+  color: #cf03dc !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #cf03dc !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #0191f1 !important;
+}
+
+.submit-btn{
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right, #cf03dc, #0191f1);
+}
+
+#login{
+  left: 50px;
+}
+#register{
+  left: 450px;
+}
+
+.logo-img{
+  left: 50%;
+  transform: translateX(-50%);
+  top: 80px;
+  width: 412.5px;
+  height: 162.5px;
+  margin: auto;
+  position: relative;
+}
+
+.loading-img{
+  opacity: 0;
+  width: 150px;
+  height: 150px;
+  left: 50%;
+  transform: translateX(45%) translateY(25%);
+}
+
+.madeby-img{
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  max-height: 1.5%;
+  max-width: 10%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+
+
+
+.back-img{
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  animation: icc 10s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes icc {
+  0%{
+    filter: hue-rotate(0deg);
+  }
+  25%{
+    filter: hue-rotate(20deg);
+  }
+  50%{
+    filter: hue-rotate(0deg);
+  }
+  75%{
+    filter: hue-rotate(-20deg);
+  }
+  100%{
+    filter: hue-rotate(0deg);
+  }
+}
+

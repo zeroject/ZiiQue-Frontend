@@ -1,0 +1,40 @@
+<div>
+  <img class="background" src="assets/ziique-beat-background.png">
+</div>
+
+<div class="menu">
+    <button mat-raised-button (click)="startBeating()" class="btn-menu">
+      <img src="assets/menu-icon.png" id="menu-img">
+    </button>
+</div>
+
+<div id="beatBoard">
+  <div class="BPM">
+    <mat-form-field appearance="outline" class="BPM-Input">
+      <mat-label>BPM</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+  </div>
+  <mat-card id="intBoard" *ngFor="let instruments of instrumentList; index as i;">
+    <button id="demoBton"
+            mat-raised-button
+            *ngIf="demoNode[i]"
+    [ngClass]="{
+     'dem0': demoNode[i].position.includes('A'),
+     'dem1': demoNode[i].position.includes('B'),
+     'dem2': demoNode[i].position.includes('C'),
+     'dem3': demoNode[i].position.includes('D'),
+     'dem4': demoNode[i].position.includes('E')
+     }" (click)="playDemo(demoNode[i])">
+      {{demoNode[i].sound}}
+    </button>
+    <button id="beatBtn"
+            mat-raised-button
+            *ngFor="let note of instruments.notes"
+            (click)="addNote(note)"
+            [ngClass]="{'green': note.isToggled,'basic': !note.isToggled}">
+
+    </button>
+  </mat-card>
+</div>
+
