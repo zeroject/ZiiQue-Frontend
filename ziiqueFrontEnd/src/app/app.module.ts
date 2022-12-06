@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
   { path: 'NewUser', component: NewUserPageComponent },
   { path: 'BeatMaker', component: BeatMakerPageComponent},
-  { path: '**', redirectTo:'Login'},
+  { path: '**', redirectTo:'/BeatMaker'},
   { path: 'Profile', pathMatch: "prefix", component: ProfilePageComponent, canActivate: [AuthguardService] },
   { path: 'Login', pathMatch: "full", component: LoginPageComponent },
   { path: 'NewUser', pathMatch: "prefix", component: NewUserPageComponent },
