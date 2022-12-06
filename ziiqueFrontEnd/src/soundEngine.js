@@ -62,20 +62,28 @@ function generateNote(note, bpm)
   }
 }
 
-export function generateTime(bpm, note)
+function generateTime(bpm, note)
 {
-  console.log("note: "+  note)
   let posR;
   let bps;
   let result;
   bps = bpm / 60
 
-  for (let i = 1; i < 16; i++) {
-    posR = (1 / bps)
-    result = posR * i
+  let splitNote;
+  splitNote = note.charAt(1)
+  let splitnum = Number(splitNote);
+
+  if (isNaN(splitnum)){
+    splitNote = note.charAt(0)
+  }
+  else{
+    splitNote = note.substring(0, 2)
   }
 
-  posR = (1 / bps)
+  let posNum;
+  posNum = Number(splitNote)
+
+  posR = 1 / bps
   result = posR * posNum
   console.log(result)
   return result
@@ -112,12 +120,6 @@ export function time(bpm)
 let beating = false;
 
 export function startBeating(Seq, bpm){
-  for (let i = 1; i < 16; i++) {
-
-    let res = generateTime(120, i + "A")
-    console.log("TimeTest: " + res  +" iteration: " + i)
-  }
-
 
   if (!beating && Tone.loaded())
   {
