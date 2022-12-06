@@ -20,12 +20,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
-
+//TODO add "canActivate: [AuthguardService]" to beatmaker. and change redirectTo '/login'
 const routes: Routes = [
   { path: 'Profile', component: ProfilePageComponent, canActivate: [AuthguardService]},
   { path: 'Login', component: LoginPageComponent },
   { path: 'NewUser', component: NewUserPageComponent },
-  { path: 'BeatMaker', component: BeatMakerPageComponent, canActivate: [AuthguardService]},
+  { path: 'BeatMaker', component: BeatMakerPageComponent},
   { path: '**', redirectTo:'Login'},
   { path: 'Profile', pathMatch: "prefix", component: ProfilePageComponent, canActivate: [AuthguardService] },
   { path: 'Login', pathMatch: "full", component: LoginPageComponent },
