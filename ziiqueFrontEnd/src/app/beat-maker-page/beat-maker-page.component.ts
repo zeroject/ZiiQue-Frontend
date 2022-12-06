@@ -140,5 +140,9 @@ export class BeatMakerPageComponent implements OnInit {
   play() {
   sound.startBeating(this.convertNodeToSeqStr(), this.bpm)
   }
+
+  startBeating() {
+
+  }
 }
 
