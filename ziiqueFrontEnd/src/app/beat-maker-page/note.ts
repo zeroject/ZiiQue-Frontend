@@ -1,5 +1,5 @@
 export interface Note{
-  position: string;
+  position: number;
   sound: string;
   isToggled: boolean;
 
