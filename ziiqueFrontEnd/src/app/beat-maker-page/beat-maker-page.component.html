@@ -33,8 +33,8 @@
             *ngFor="let note of instruments.notes"
             (click)="addNote(note)"
             [ngClass]="{'green': note.isToggled,'basic': !note.isToggled}">
-
     </button>
+    <button id="playBtn" (click)="play()"> PLAYn</button>
   </mat-card>
 </div>
 

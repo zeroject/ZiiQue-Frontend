@@ -2,7 +2,6 @@ import * as Tone from 'tone'
 import {Context, now, Time, Transport} from 'tone'
 import {repeat} from "rxjs";
 
-
 const multplayer = new Tone.Players({
   urls: {
     kick: './assets/samples/Hard_Kick.mp3',
@@ -12,6 +11,8 @@ const multplayer = new Tone.Players({
     snare: './assets/samples/Snare__Claps.mp3',
   }
 }).toDestination();
+
+
 
 
 export function demoNode(x)
@@ -40,41 +41,44 @@ export function demoNode(x)
 function generateNote(note, bpm)
 {
   let s =note.charAt(1)
-
-  generateTime(bpm, note)
-  console.log(note)
   switch (s)
   {
     case "A":
-      multplayer.player('kick').start(generateTime(bpm, note)).sync();
+      multplayer.player('kick').start( now() +generateTime(bpm, note)).sync();
       console.log('CheckA')
       break;
     case "B":
-      multplayer.player('bass').start(generateTime(bpm, note)).sync();
+      multplayer.player('bass').start(now() +generateTime(bpm, note)).sync();
       break;
     case "C":
-      multplayer.player('hihat').start(generateTime(bpm, note)).sync();
+      multplayer.player('hihat').start(now() + generateTime(bpm, note)).sync();
       break;
     case "D":
-      multplayer.player('ride').start(generateTime(bpm, note)).sync();
+      multplayer.player('ride').start(now() +generateTime(bpm, note)).sync();
       break;
     case "E":
-      multplayer.player('snare').start(generateTime(bpm, note)).sync();
+      multplayer.player('snare').start(now() +generateTime(bpm, note)).sync();
       break;
   }
 }
 
-function generateTime(bpm, note)
+export function generateTime(bpm, note)
 {
+  console.log("note: "+  note)
+  let posR;
   let bps;
+  let result;
   bps = bpm / 60
 
-  let splitNote;
-  splitNote = note.charAt(0)
-  let posNum;
-  posNum = Number(splitNote)
+  for (let i = 1; i < 16; i++) {
+    posR = (1 / bps)
+    result = posR * i
+  }
 
-  return (1 / bps) * posNum
+  posR = (1 / bps)
+  result = posR * posNum
+  console.log(result)
+  return result
 }
 
 export function time(bpm)
@@ -108,19 +112,25 @@ export function time(bpm)
 let beating = false;
 
 export function startBeating(Seq, bpm){
-  if (!beating)
+  for (let i = 1; i < 16; i++) {
+
+    let res = generateTime(120, i + "A")
+    console.log("TimeTest: " + res  +" iteration: " + i)
+  }
+
+
+  if (!beating && Tone.loaded())
   {
   for (let note in Seq) {
     generateNote(Seq[note], bpm)
     console.log("startBeating: " + Seq[note])
-    Tone.Transport.start(Tone.now())
-    console.log(multplayer.state)
+    Tone.Transport.start(now())
     beating = true;
   }
   }
 
   else {
-    multplayer.stopAll(Tone.now())
+    Tone.Transport.stop(now())
     console.log(multplayer.state)
   beating = false}
 }
