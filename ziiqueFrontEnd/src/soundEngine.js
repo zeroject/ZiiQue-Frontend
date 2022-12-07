@@ -1,4 +1,4 @@
-import {repeat} from "rxjs";
+import {interval, repeat} from "rxjs";
 import {Howl, Howler} from 'howler';
 
 var newsound = new Howl({
@@ -176,56 +176,33 @@ export function timer(bpm)
     elapsed = Date.now() - startTime
     return elapsed
   }
+}
 
+function getInterval(bpm)
+{
+  let result = [];
+  let bps = bpm / 60
+  let interval = 1/ bps
+  for (let i = 0; i < 16; i++) {
+    let it = interval * i
+    result.push(it)
+  }
+  return result
 }
 
 let beating = false;
 
 export function startBeating(Seq, bpm){
   soundBank = []
-  console.log("number of notes: " +  soundBank.length)
+  let gap = getInterval(bpm)
   if (!beating) {
     for (let note in Seq) {
       generateNote(Seq[note], bpm)
     }
-    console.log("please beat... please")
-    let i = 0;
-    if (!soundBank[1]) {
-      console.log("should play but dosen't ")
-      soundBank[i].howl.play('sound', false)
-    }else {
-      if (soundBank[i + 1]?.time === soundBank[i]?.time) {
-        soundBank[i].howl.play("sound", false)
-        soundBank[i+1].howl.play("sound", false)
-        if (soundBank[i + 2]?.time === soundBank[i + 1]?.time) {
-          soundBank[i+2].howl.play("sound", false)
-          if (soundBank[i + 3]?.time === soundBank[i + 2]?.time) {
-            soundBank[i+3].howl.play("sound", false)
-            if (soundBank[i + 4]?.time === soundBank[i + 3]?.time) {
-              soundBank[i+4].howl.play("sound", false)
-            }
-          }
-        }
-      }
-    }
-    }
-
-  else {
-
-  beating = false}
-}
-/*
-new play method()
-start timer.
-max lenght / 16. check if any node needs to play. *1 *2 *3 to check if anything needs to play.
-play from right player with .not
-
-case "B"
-foreach (node : array)
-if (generateTime(notePos, bpm) = timer)
-{
-multplayer.player('bass').start(now())
+    /*researh soundBank at i, if it matches first gap, then que for play when timer is equal to soundbank[i].time
+    when soundbank[i].time does not match gap[j]. => j++
+    */
+    beating = false
+  }
 }
 
-play apropiate sound .now
- */

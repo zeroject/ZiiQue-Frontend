@@ -39,22 +39,25 @@ export class BeatMakerPageComponent implements OnInit {
       let instrument: Instruments = {notes: [], nameN: names[i]}
       this.instrumentList.push(instrument)
     }
+    let id =0;
     for (let i = 0; i < this.instrumentList.length; i++) {
       for (let pos = 1; pos < NumberOfBars + 1; pos++) {
         let node: Note = {
           position: pos,
           sound: this.instrumentList[i].nameN,
-          isToggled: false
+          isToggled: false,
+          id: id
         }
+        id++
         this.instrumentList[i].notes.push(node)
       }
     }
-  }
+    }
 
   //creates the demo notes to be shown in the gui.
   createDemoIns() {
     for (let i = 0; i < names.length; i++) {
-      let node: Note = {position: 0, sound: names[i], isToggled: false}
+      let node: Note = {position: 0, sound: names[i], isToggled: false, id: i}
       this.demoNode.push(node)
     }
   }
@@ -71,7 +74,8 @@ export class BeatMakerPageComponent implements OnInit {
       }
      else {
       note.isToggled = false;
-          this.sortAllSeq =  this.sortAllSeq.filter(b => b.position !== note.position);
+          this.sortAllSeq =  this.sortAllSeq.filter(b => b.id !== note.id);
+          console.log(this.sortAllSeq.length)
       }
     }
 
