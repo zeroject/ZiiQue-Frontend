@@ -54,10 +54,10 @@ export function demoNode(x)
   switch (x)
   {
     case x="A":
-      newsound.play('kick', false)
+      kick.play('kick', false)
      break;
     case x="B":
-      newsound.play('bass', false)
+      bass.play('bass', false)
       break;
     case x="C":
       hihat.play('hihat', false)
@@ -78,18 +78,12 @@ function generateNote(note, bpm)
   {
     case "A":
       var sound = new Howl({
-        src: ['./assets/samples/Hard_Kick.mp3'],
-        sprite: {
-          sound: [500, generateTime(bpm, note)]
-        }
-      });
+        src: ['./assets/samples/Hard_Kick.mp3']});
       soundBank.push(sound)
       break;
     case "B":
       var sound = new Howl({
-        src: [ './assets/samples/808.mp3' ],
-      });
-
+        src: [ './assets/samples/808.mp3' ],});
       soundBank.push(sound)
       break;
     case "C":

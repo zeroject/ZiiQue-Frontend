@@ -17,12 +17,8 @@ let NumberOfBars = 16;
 
 export class BeatMakerPageComponent implements OnInit {
   instrumentList: Instruments[] = [];
-  demoNode: Note[] = [];
-  sequenceA: Note[] = [];
-  sequenceB: Note[] = [];
-  sequenceC: Note[] = [];
-  sequenceD: Note[] = [];
-  sequenceE: Note[] = [];
+  sortAllSeq: Note[] = [];
+  demoNode: Note[] = []
   bpm: number = 120;
 
 
@@ -38,6 +34,8 @@ export class BeatMakerPageComponent implements OnInit {
 
   }
 
+
+  //creates instruments according to the names array. and the amount of nodes per instrument. set by the NumberOfBars.
   createInstruments() {
     for (let i = 0; i < names.length; i++) {
       let instrument: Instruments = {notes: [], nameN: names[i]}
@@ -55,84 +53,47 @@ export class BeatMakerPageComponent implements OnInit {
     }
   }
 
+  //creates the demo notes to be shown in the gui.
   createDemoIns() {
     for (let i = 0; i < names.length; i++) {
       let node: Note = {position: 0, sound: names[i], isToggled: false}
       this.demoNode.push(node)
     }
   }
-
-  addNote(note: Note) {
-    console.log(this.sequenceA[0])
-    if (!note.isToggled) {
-      switch (note.sound) {
-        case "A":
-          this.sequenceA.push(note);
-          break;
-        case "B":
-          this.sequenceB.push(note);
-          break;
-        case "C":
-          this.sequenceC.push(note);
-          break;
-        case "D":
-          this.sequenceD.push(note);
-          break;
-        case "E":
-          this.sequenceE.push(note);
-          break;
-      }
-      note.isToggled = true;
-    } else {
-      note.isToggled = false;
-      switch (note.sound) {
-        case "A":
-          this.sequenceA = this.sequenceA.filter(b => b.position !== note.position);
-          break;
-        case "B":
-          this.sequenceB = this.sequenceB.filter(b => b.position !== note.position);
-          break;
-        case "C":
-          this.sequenceC = this.sequenceC.filter(b => b.position !== note.position);
-          break;
-        case "D":
-          this.sequenceD = this.sequenceD.filter(b => b.position !== note.position);
-          break;
-        case "E":
-          this.sequenceE = this.sequenceE.filter(b => b.position !== note.position);
-          break;
-      }
-    }
-  }
-
+//plays the note pressed in the gui
   playDemo(note: Note) {
     sound.demoNode(note.sound)
   }
 
-  sortSeq() {
-    let allSeq = [this.sequenceA, this.sequenceB, this.sequenceC, this.sequenceD, this.sequenceE];
-
-    for (let i = 0; i < allSeq.length; i++) {
-      allSeq[i] = allSeq[i].sort((a, b) => (a.position < b.position ? -1 : 1))
+  //(click) adds the note pressed to the total sequence
+  addNote(note: Note) {
+    if (!note.isToggled) {
+      note.isToggled = true;
+      this.sortAllSeq.push(note)
+      }
+     else {
+      note.isToggled = false;
+          this.sortAllSeq.filter(b => b.position !== note.position);
+      }
     }
-  }
 
 
 
+  //sorts an array of notes by the position. from first position to last.
+  sortSeq(allSeq : Note[]) {
+    return  allSeq = allSeq.sort((a, b) => (a.position < b.position ? -1 : 1))
+    }
 
+
+
+//converts all nodes applied and sorts them into a single array of Notes, from first position to last position
   convertNodeToSeqStr() : string[]
   {
     let result : string[] = []
-    this.sortSeq()
-    let allSeq = [this.sequenceA, this.sequenceB, this.sequenceC, this.sequenceD, this.sequenceE];
-    for (let i = 0; i < allSeq.length; i++) {
-      for (let j = 0; j < allSeq[i].length; j++) {
-        result.push(allSeq[i][j].position + allSeq[i][j].sound)
+    let sorted : Note[] = this.sortSeq(this.sortAllSeq)
+    for (let i = 0; i < sorted.length; i++) {
+        result.push(sorted[i].position + sorted[i].sound)
       }
-    }
-    for (let i = 0; i < result.length; i++) {
-      console.log("convert "+ result[i])
-    }
     return result;
     }
 
