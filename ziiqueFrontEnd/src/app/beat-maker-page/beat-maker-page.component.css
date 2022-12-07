@@ -1,0 +1,148 @@
+.menu{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.btn-menu{
+  background-color: transparent;
+}
+
+#menu-img{
+  height: 50px;
+  width: 50px;
+}
+
+.BPM{
+  top: -95px;
+  position: absolute;
+  z-index: 100;
+  margin: auto;
+}
+
+.BPM-Input{
+  width: 75px;
+  font-family: Arial;
+  color: white;
+  font-size: large;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label when clicked*/
+  color: white !important;
+}
+
+::ng-deep .mat-form-field-label{
+  /*change color of label*/
+  color: white !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-outline{
+  color: white !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: white !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: white !important;
+}
+
+.background{
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+
+.green{
+  background-color: #58cd36;
+  border-color: green;
+  box-shadow: 0 0 10px green;
+}
+
+.basic{
+  background-color: lightgray;
+}
+
+.mat-card{
+  border-radius: 0px;
+}
+
+#beatBoard{
+  top: 100px;
+  position: relative;
+  margin: auto;
+  padding: 5px;
+  display: grid;
+  place-items: center;
+  grid-auto-flow: row;
+  row-gap: 0px;
+}
+
+#intBoard{
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 10px;
+  padding: 5px;
+}
+
+#beatBtn{
+  min-height: 40px;
+  min-width: 40px;
+
+}
+
+#demoBton
+{
+  border-radius: 5px;
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.dem0
+{
+  background-color: #ED121F;
+    border-color: mediumvioletred;
+  box-shadow: 0 0 5px mediumvioletred;
+}
+
+.dem1
+{
+  background-color: #0EF1E4;
+  border-color: cornflowerblue;
+  box-shadow: 0 0 10px cornflowerblue;
+}
+
+.dem2
+{
+  background-color: #DFF30C;
+  border-color: lightgoldenrodyellow;
+  box-shadow: 0 0 10px lightgoldenrodyellow;
+}
+
+.dem3
+{
+  background-color: #200CF3;
+  border-color: darkblue;
+  box-shadow: 0 0 5px darkblue;
+}
+
+.dem4
+{
+  background-color: #F1820E;
+  border-color: coral;
+  box-shadow: 0 0 5px salmon;
+}

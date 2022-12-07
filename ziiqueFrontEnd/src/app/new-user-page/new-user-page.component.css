@@ -1,0 +1,19 @@
+body
+{
+  display: grid;
+  place-items: center;
+}
+mat-card
+{
+  display: flex;
+  flex-direction: column;
+}
+mat-card-actions
+{
+  display: grid;
+  place-items: center;
+}
+button
+{
+  background: #B4D9FB;
+}
