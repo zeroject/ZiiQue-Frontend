@@ -199,6 +199,25 @@ export function startBeating(Seq, bpm){
     for (let note in Seq) {
       generateNote(Seq[note], bpm)
     }
+    timer(bpm);
+    timer.start;
+
+      for (let i = 0; i < soundBank.length; i++){
+        let j = 0;
+          function track(){
+          if (soundBank[i].time == gap[j] * 1000){
+            console.log(soundBank[i].time + " : " + gap[j] + "")
+            soundBank[i].howl.play("sound", false);
+          }
+            j++;
+        }
+          setInterval(track, (1 / (bpm / 60)) * 1000);
+      }
+
+
+
+
+
     /*researh soundBank at i, if it matches first gap, then que for play when timer is equal to soundbank[i].time
     when soundbank[i].time does not match gap[j]. => j++
     */
