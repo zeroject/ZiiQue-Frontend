@@ -71,7 +71,7 @@ export class BeatMakerPageComponent implements OnInit {
       }
      else {
       note.isToggled = false;
-          this.sortAllSeq.filter(b => b.position !== note.position);
+          this.sortAllSeq =  this.sortAllSeq.filter(b => b.position !== note.position);
       }
     }
 

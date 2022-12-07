@@ -75,7 +75,7 @@ export function demoNode(x)
 function generateNote(note, bpm)
 {
   console.log(note)
-  let time =  generateTime(note, bpm)
+  let time =  Number(generateTime(note, bpm))
   let s = note.charAt(1)
   let source;
   switch (s)
@@ -102,7 +102,7 @@ function generateNote(note, bpm)
       sprite: {
         sound: [0, 1000]
       }})
-  let node = {krono : time, howl : sound}
+  let node = {time : time, howl : sound}
   soundBank.push(node)
 }
 
@@ -110,7 +110,7 @@ function generateTime(note, bpm)
 {
   let posR;
   let bps;
-  let result;
+  let result = Number;
   bps = bpm / 60
 
   let splitNote;
@@ -182,32 +182,33 @@ export function timer(bpm)
 let beating = false;
 
 export function startBeating(Seq, bpm){
-
+  soundBank = []
+  console.log("number of notes: " +  soundBank.length)
   if (!beating) {
     for (let note in Seq) {
       generateNote(Seq[note], bpm)
     }
+    console.log("please beat... please")
     let i = 0;
-    if (soundBank[i+1].krono === soundBank[i].krono)
-    {
-      if (soundBank[i+2].krono === soundBank[i+1].krono)
-      {
-        if (soundBank[i+3].krono === soundBank[i+2].krono)
-        {
-          if (soundBank[i+4].krono === soundBank[i+3].krono)
-          {
-            if (soundBank[i+5].krono === soundBank[i+4].krono)
-            {
-
+    if (!soundBank[1]) {
+      console.log("should play but dosen't ")
+      soundBank[i].howl.play('sound', false)
+    }else {
+      if (soundBank[i + 1]?.time === soundBank[i]?.time) {
+        soundBank[i].howl.play("sound", false)
+        soundBank[i+1].howl.play("sound", false)
+        if (soundBank[i + 2]?.time === soundBank[i + 1]?.time) {
+          soundBank[i+2].howl.play("sound", false)
+          if (soundBank[i + 3]?.time === soundBank[i + 2]?.time) {
+            soundBank[i+3].howl.play("sound", false)
+            if (soundBank[i + 4]?.time === soundBank[i + 3]?.time) {
+              soundBank[i+4].howl.play("sound", false)
             }
           }
         }
       }
     }
-    else {
-      soundBank[i].howl.play('sound', false)
     }
-  }
 
   else {
 
