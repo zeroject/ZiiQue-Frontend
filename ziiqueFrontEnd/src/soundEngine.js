@@ -71,31 +71,42 @@ export function demoNode(x)
   }
 }
 
+
 function generateNote(note, bpm)
 {
-  let s =note.charAt(1)
+  console.log(note)
+  let time =  generateTime(note, bpm)
+  let s = note.charAt(1)
+  let source;
   switch (s)
   {
     case "A":
-      var sound = new Howl({
-        src: ['./assets/samples/Hard_Kick.mp3']});
-      soundBank.push(sound)
+        source = './assets/samples/Hard_Kick.mp3'
       break;
     case "B":
-      var sound = new Howl({
-        src: [ './assets/samples/808.mp3' ],});
-      soundBank.push(sound)
+        source = './assets/samples/808.mp3'
       break;
     case "C":
+        source = './assets/samples/Hihat.mp3'
       break;
     case "D":
+        source = './assets/samples/Ride.mp3'
       break;
     case "E":
+        source = './assets/samples/Snare__Claps.mp3'
       break;
   }
+  let sound = new Howl(
+    {
+      src: [source],
+      sprite: {
+        sound: [0, 1000]
+      }})
+  let node = {krono : time, howl : sound}
+  soundBank.push(node)
 }
 
-function generateTime(bpm, note)
+function generateTime(note, bpm)
 {
   let posR;
   let bps;
@@ -118,53 +129,84 @@ function generateTime(bpm, note)
 
   posR = 1 / bps
   result = posR * posNum * 1000
-  console.log(result)
   return result
 }
 
-export function time(bpm)
+export function timer(bpm)
 {
   let totalLength = ((bpm / 60) * 16) / 1000
-  let startTime = Date.now();
+  let startTime;
   let elapsed = 0;
   let run = false;
+  let loopBool = true;
 
   function start()
   {
     if (!run)
     {
+      startTime = Date.now();
       run = true;
     }
     else run = false
   }
 
+  function loop()
+  {
+    if (!loopBool)
+    {
+      loopBool = true;
+    }
+    else loopBool = false
+  }
+
+  if (loopBool)
+  {
+    if (elapsed > totalLength)
+    {
+      startTime = Date.now()
+    }
+  }
+  else
+  {
+    run = false
+  }
+
   while (run)
   {
     elapsed = Date.now() - startTime
+    return elapsed
   }
 
-  if (elapsed === totalLength)
-  {
-    startTime = Date.now()
-  }
-  return elapsed
 }
 
 let beating = false;
 
 export function startBeating(Seq, bpm){
 
-  if (!beating)
-  {
-  for (let note in Seq) {
-    generateNote(Seq[note], bpm)
-    for (let i = 0; i < soundBank.length; i++) {
-      console.log(soundBank[i])
-      soundBank[i].play('sound')
+  if (!beating) {
+    for (let note in Seq) {
+      generateNote(Seq[note], bpm)
     }
-    console.log("startBeating: " + Seq[note])
-    beating = true;
-  }
+    let i = 0;
+    if (soundBank[i+1].krono === soundBank[i].krono)
+    {
+      if (soundBank[i+2].krono === soundBank[i+1].krono)
+      {
+        if (soundBank[i+3].krono === soundBank[i+2].krono)
+        {
+          if (soundBank[i+4].krono === soundBank[i+3].krono)
+          {
+            if (soundBank[i+5].krono === soundBank[i+4].krono)
+            {
+
+            }
+          }
+        }
+      }
+    }
+    else {
+      soundBank[i].howl.play('sound', false)
+    }
   }
 
   else {
