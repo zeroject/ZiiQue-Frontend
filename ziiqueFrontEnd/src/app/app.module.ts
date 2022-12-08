@@ -23,7 +23,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
   { path: 'BeatMaker', component: BeatMakerPageComponent },
-  { path: '**', redirectTo:'Login'},
+  { path: '**', redirectTo:'BeatMaker'},
 ];
 
 @NgModule({

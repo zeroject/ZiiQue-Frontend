@@ -23,7 +23,7 @@
         </mat-form-field>
     </div>
     <div class="play">
-        <button mat-raised-button (click)="startBeating()" class="btn-play">
+        <button mat-raised-button (click)="play()" class="btn-play">
             <img src="assets/menu-icon.png" id="play-img">
         </button>
     </div>
@@ -32,11 +32,11 @@
                 mat-raised-button
                 *ngIf="demoNode[i]"
                 [ngClass]="{
-     'dem0': demoNode[i].position.includes('A'),
-     'dem1': demoNode[i].position.includes('B'),
-     'dem2': demoNode[i].position.includes('C'),
-     'dem3': demoNode[i].position.includes('D'),
-     'dem4': demoNode[i].position.includes('E')
+     'dem0': demoNode[i].sound.includes('A'),
+     'dem1': demoNode[i].sound.includes('B'),
+     'dem2': demoNode[i].sound.includes('C'),
+     'dem3': demoNode[i].sound.includes('D'),
+     'dem4': demoNode[i].sound.includes('E')
      }" (click)="playDemo(demoNode[i])">
             {{demoNode[i].sound}}
         </button>
