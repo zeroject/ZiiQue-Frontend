@@ -199,10 +199,11 @@ function getInterval(bpm)
 }
 
 let beating = false;
+let intervalId = 0;
 
 export function startBeating(Seq, bpm){
   soundBank = []
-  let intervalId
+
   let gap = getInterval(bpm)
 
   if (beating)
@@ -218,6 +219,8 @@ export function startBeating(Seq, bpm){
     for (let i = 0; i < soundBank.length; i++) {
       let j = 0;
 
+      intervalId = setInterval(track, (1 / (bpm / 60)) * 1000);
+
       function track() {
         if (soundBank[i].time == gap[j] * 1000) {
           console.log(soundBank[i].time + " : " + gap[j] + "")
@@ -229,12 +232,12 @@ export function startBeating(Seq, bpm){
           j++;
         }
       }
-      intervalId = setInterval(track, (1 / (bpm / 60)) * 1000);
     }
   }
   else
   {
     console.log("is beating" + beating)
+    console.log("int val: " +  intervalId)
     beating = false;
     clearInterval(intervalId)
   }
