@@ -207,8 +207,6 @@ export function startBeating(Seq, bpm){
     for (let note in Seq) {
       generateNote(Seq[note], bpm)
     }
-    timer(bpm);
-    timer.start;
 
       for (let i = 0; i < soundBank.length; i++){
         let j = 0;
@@ -217,7 +215,15 @@ export function startBeating(Seq, bpm){
             console.log(soundBank[i].time + " : " + gap[j] + "")
             soundBank[i].howl.play("sound", false);
           }
+          if (j=== gap.length)
+          {
+            j=0
+          }
+          else
+          {
             j++;
+          }
+          
         }
           setInterval(track, (1 / (bpm / 60)) * 1000);
       }
