@@ -9,7 +9,7 @@
         <img class="logo" src="assets/ZiiQue-Logo.png">
     </div>
     <div class="menu">
-        <button mat-raised-button (click)="startBeating()" class="btn-menu">
+        <button mat-raised-button (click)="onClick()" class="btn-menu">
             <img src="assets/menu-icon.png" id="menu-img">
         </button>
     </div>
@@ -18,7 +18,7 @@
     <div class="BPM">
         <mat-form-field appearance="outline" class="BPM-Input">
             <mat-label>BPM</mat-label>
-            <input matInput type="number" [(ngModel)]="bpm">
+            <input matInput type="number">
             <mat-hint class="inputHint">Speed Of The Beat</mat-hint>
         </mat-form-field>
     </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Instruments} from "./instruments";
 import {Note} from "./note";
 import * as sound from "../../soundEngine";
+import { MatDialog } from '@angular/material/dialog';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 let names = ["A","B","C","D","E"]
 let NumberOfBars = 16;
@@ -19,8 +21,16 @@ export class BeatMakerPageComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
 
+  }
+
+  onClick() {
+    this.dialog.open(ProfilePageComponent, {
+      height: '100%',
+      width: '30%',
+      position: { right: "0" },
+    });
   }
 
   ngOnInit(): void {

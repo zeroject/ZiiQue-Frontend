@@ -1,0 +1,48 @@
+
+body{
+    position: relative;
+}
+
+mat-button-toggle-group {
+  top: 10px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  background: radial-gradient(circle, rgba(120,16,210,1) 35%, rgba(0,212,255,1) 100%);
+  border-width: 1px;
+} 
+
+.navButton{
+    width: 33.33%;
+    border-width: 5px;
+    margin: 4px;
+    border-radius: 5px;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.contentDiv{
+    border-color: white;
+    border-width: 3px;
+    border: solid;
+    position: absolute;
+    top: 110px;
+    right: 0px;
+    left: 0px;
+    bottom: 20px;
+    background-color: dimgrey;
+}
+
+#profileDiv{
+    z-index: 100;
+}
+
+#beatsDiv{
+    z-index: 99;
+}
+
+#settingsDiv{
+    z-index: 99;
+}
