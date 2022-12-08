@@ -238,8 +238,8 @@ export function startBeating(Seq, bpm){
   {
     console.log("is beating" + beating)
     console.log("int val: " +  intervalId)
-    beating = false;
     clearInterval(intervalId)
+    beating = false;
   }
 }
 
