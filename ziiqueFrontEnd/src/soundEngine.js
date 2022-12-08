@@ -76,7 +76,15 @@ function generateNote(note, bpm)
 {
   console.log(note)
   let time =  Number(generateTime(note, bpm))
-  let s = note.charAt(1)
+  let s
+  let snum = Number(note.charAt(1))
+  if (isNaN(snum))
+  {
+    s = note.charAt(1)
+  }
+  else
+    s = note.charAt(2);
+
   let source;
   switch (s)
   {
