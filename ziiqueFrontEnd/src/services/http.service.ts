@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 
 export const customAxios = axios.create(
   {
-    baseURL: 'https:/localhost:7003/api',
+    baseURL: 'https://ziique-beatmaker-api.azurewebsites.net/api',
     headers: {
       Authorization: `bearer ${localStorage.getItem('token')}`
     }
