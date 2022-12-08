@@ -40,8 +40,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   async Submit() {
-    var loading = document.getElementById("loading");
-    var formbox = document.getElementById("form-box");
     if (!this.Username_Email) {
       this.snackbar.open("Remember to enter either your email or username", "Ok")
     }
@@ -50,7 +48,9 @@ export class LoginPageComponent implements OnInit {
     } else{
       let dto = {
         Username_Email: this.Username_Email,
-        Password: this.password
+
+        password: this.password
+
       }
       // @ts-ignore
       this.loading.style.opacity = "100";
