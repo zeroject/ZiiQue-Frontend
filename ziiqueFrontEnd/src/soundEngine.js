@@ -236,8 +236,6 @@ export function startBeating(Seq, bpm){
   }
   else
   {
-    console.log("is beating" + beating)
-    console.log("int val: " +  intervalId)
     beating = false;
     for (let i = 0; i < intervalId.length; i++) {
       clearInterval(intervalId[i])
