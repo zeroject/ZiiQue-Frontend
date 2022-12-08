@@ -202,40 +202,41 @@ let beating = false;
 
 export function startBeating(Seq, bpm){
   soundBank = []
+  let intervalId
   let gap = getInterval(bpm)
-  if (!beating) {
+
+  if (beating)
+  {
+    beating =  false
+  }
+  else (beating = true)
+
+  if (beating) {
     for (let note in Seq) {
       generateNote(Seq[note], bpm)
     }
+    for (let i = 0; i < soundBank.length; i++) {
+      let j = 0;
 
-      for (let i = 0; i < soundBank.length; i++){
-        let j = 0;
-          function track(){
-          if (soundBank[i].time == gap[j] * 1000){
-            console.log(soundBank[i].time + " : " + gap[j] + "")
-            soundBank[i].howl.play("sound", false);
-          }
-          if (j=== gap.length)
-          {
-            j=0
-          }
-          else
-          {
-            j++;
-          }
-          
+      function track() {
+        if (soundBank[i].time == gap[j] * 1000) {
+          console.log(soundBank[i].time + " : " + gap[j] + "")
+          soundBank[i].howl.play("sound", false);
         }
-          setInterval(track, (1 / (bpm / 60)) * 1000);
+        if (j === gap.length || !gap) {
+          j = 0
+        } else {
+          j++;
+        }
       }
-
-
-
-
-
-    /*researh soundBank at i, if it matches first gap, then que for play when timer is equal to soundbank[i].time
-    when soundbank[i].time does not match gap[j]. => j++
-    */
-    beating = false
+      intervalId = setInterval(track, (1 / (bpm / 60)) * 1000);
+    }
+  }
+  else
+  {
+    console.log("is beating" + beating)
+    beating = false;
+    clearInterval(intervalId)
   }
 }
 
