@@ -1,6 +1,6 @@
-export interface Beat {
+export interface BeatDTO {
   title: string;
   summary: string;
   beatstring: string;
-  userId: number;
+  userEmail: string;
 }

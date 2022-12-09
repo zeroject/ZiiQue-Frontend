@@ -15,27 +15,27 @@
 
 .play {
   position: absolute;
-  top: -82px;
+  top: -62px;
   left: 5px;
 }
 
 .btn-play {
   background-color: #414141;
-  height: 88px;
+  height: 68px;
 }
 
 #play-img {
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
 }
 
 .BPM {
   padding: 5px;
   padding-right: 20px;
   position: absolute;
-  top: -82px;
-  left: 114px;
-  z-index: 100;
+  top: -62px;
+  left: 94px;
+  z-index: 99;
   background-color: #414141;
   border-top-right-radius: 5px;
 }
@@ -45,10 +45,18 @@
   height: fit-content;
   font-family: Arial;
   font-size: 14px;
+  z-index: 99;
 }
 
-.inputHint{
-    font-size: 10px;
+.save {
+  position: absolute;
+  top: -62px;
+  left: 246px;
+}
+
+.btn-save {
+  background-color: #414141;
+  height: 68px;
 }
 
 .header {
@@ -126,6 +134,7 @@
   row-gap: 0px;
   width: fit-content;
   margin: auto;
+  z-index: 100;
 }
 
 #intBoard{
@@ -133,12 +142,13 @@
   grid-auto-flow: column;
   column-gap: 10px;
   padding: 5px;
+  z-index: 100;
 }
 
 #beatBtn{
   min-height: 60px;
   min-width: 60px;
-
+  z-index: 100;
 }
 
 #demoBton
@@ -146,6 +156,7 @@
   border-radius: 5px;
   min-height: 40px;
   min-width: 40px;
+  z-index: 100;
 }
 
 .dem0

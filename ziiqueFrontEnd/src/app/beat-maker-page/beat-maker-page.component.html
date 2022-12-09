@@ -15,16 +15,20 @@
     </div>
 </div>
 <div id="beatBoard">
+    <div class="play">
+        <button mat-raised-button (click)="play()" class="btn-play">
+            <img src="assets/menu-icon.png" id="play-img">
+        </button>
+    </div>
     <div class="BPM">
         <mat-form-field appearance="outline" class="BPM-Input">
             <mat-label>BPM</mat-label>
             <input matInput type="number">
-            <mat-hint class="inputHint">Speed Of The Beat</mat-hint>
         </mat-form-field>
     </div>
-    <div class="play">
-        <button mat-raised-button (click)="play()" class="btn-play">
-            <img src="assets/menu-icon.png" id="play-img">
+    <div class="save">
+        <button mat-raised-button (click)="saveBeat()" class="btn-save">
+            Save Your Beat
         </button>
     </div>
     <mat-card id="intBoard" *ngFor="let instruments of instrumentList; index as i;">

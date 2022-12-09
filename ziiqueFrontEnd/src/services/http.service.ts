@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 import { User } from "../User"
 import {environment} from "../environments/environment";
 import {Router} from "@angular/router";
-import { Beat } from '../app/beat-maker-page/profile-page/Beat';
+import { BeatDTO } from '../app/beat-maker-page/profile-page/BeatDTO';
 
 
 export const customAxios = axios.create(
@@ -67,18 +67,21 @@ export class HttpService {
     return httpResult.data
   }
 
-  async createBeat(beat: Beat) {
-    const httpResult = await customAxios.post('Beat/createBeat', beat, this.email);
+  async createBeat(beatDTO: BeatDTO) {
+    beatDTO.userEmail = this.email;
+    const httpResult = await customAxios.post('Beat/createBeat', beatDTO);
     return httpResult.data
   }
 
-  async updateBeat(beat: Beat) {
-    const httpResult = await customAxios.put('Beat/updateBeat', beat, this.email);
+  async updateBeat(beatDTO: BeatDTO) {
+    beatDTO.userEmail = this.email;
+    const httpResult = await customAxios.put('Beat/updateBeat', beatDTO);
     return httpResult.data
   }
-  /*
-  async deleteBeat(beat: Beat) {
-    const httpResult = await customAxios.delete('Beat/deleteBeat', beat, this.email);
+  
+  async deleteBeat(beatDTO: BeatDTO) {
+    beatDTO.userEmail = this.email;
+    const httpResult = await customAxios.delete('Beat/deleteBeat', { data: beatDTO });
     return httpResult.data
-  }*/
+  }
 }
