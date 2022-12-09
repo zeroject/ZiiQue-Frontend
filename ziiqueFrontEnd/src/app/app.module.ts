@@ -19,6 +19,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatDialogModule } from '@angular/material/dialog';
+import { SaveBeatPageComponent } from './beat-maker-page/save-beat-page/save-beat-page.component';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
     AppComponent,
     LoginPageComponent,
     BeatMakerPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    SaveBeatPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -4,6 +4,7 @@ import {Note} from "./note";
 import * as sound from "../../soundEngine";
 import { MatDialog } from '@angular/material/dialog';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { SaveBeatPageComponent } from './save-beat-page/save-beat-page.component';
 
 let names = ["A","B","C","D","E"]
 let NumberOfBars = 16;
@@ -25,6 +26,12 @@ export class BeatMakerPageComponent implements OnInit {
 
   }
 
+  ngOnInit(): void {
+    this.createInstruments()
+    this.createDemoIns()
+
+  }
+
   onClick() {
     this.dialog.open(ProfilePageComponent, {
       height: '100%',
@@ -33,10 +40,13 @@ export class BeatMakerPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.createInstruments()
-    this.createDemoIns()
-
+  saveBeat() {
+    this.dialog.open(SaveBeatPageComponent, {
+      height: '240px',
+      width: '25%',
+      
+      
+    });
   }
 
   startBeating() {

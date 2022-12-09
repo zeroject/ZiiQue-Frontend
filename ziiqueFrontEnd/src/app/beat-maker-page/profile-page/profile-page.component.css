@@ -15,7 +15,7 @@ mat-button-toggle-group {
 } 
 
 .navButton{
-    width: 33.33%;
+    width: 50%;
     border-width: 5px;
     margin: 4px;
     border-radius: 5px;
@@ -23,16 +23,16 @@ mat-button-toggle-group {
     font-size: 20px;
 }
 
-.contentDiv{
-    border-color: white;
-    border-width: 3px;
-    border: solid;
-    position: absolute;
-    top: 110px;
-    right: 0px;
-    left: 0px;
-    bottom: 20px;
-    background-color: dimgrey;
+.contentDiv {
+  border-color: white;
+  border-width: 3px;
+  border: solid;
+  position: absolute;
+  top: 110px;
+  right: 0px;
+  left: 0px;
+  bottom: 20px;
+  background-color: #484444;
 }
 
 #profileDiv{
@@ -40,9 +40,5 @@ mat-button-toggle-group {
 }
 
 #beatsDiv{
-    z-index: 99;
-}
-
-#settingsDiv{
     z-index: 99;
 }
