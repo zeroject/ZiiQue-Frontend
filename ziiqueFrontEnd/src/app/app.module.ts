@@ -18,7 +18,7 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
@@ -48,7 +48,8 @@ const routes: Routes = [
     MatSnackBarModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDialogModule
   ],
   providers: [
 
