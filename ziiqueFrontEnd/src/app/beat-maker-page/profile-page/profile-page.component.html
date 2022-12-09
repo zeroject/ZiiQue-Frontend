@@ -1,0 +1,21 @@
+<body>
+    <mat-button-toggle-group id="navBarGroup">
+        <mat-button-toggle id="profileBtn" class="navButton" mat-raised-button (change)="goToProfile()">Profile</mat-button-toggle>
+        <mat-button-toggle id="beatsBtn" class="navButton" mat-raised-button (change)="goToBeats()">Beats</mat-button-toggle>
+    </mat-button-toggle-group>
+    
+    <div id="profileDiv" class="contentDiv">
+        <p>Profile!</p>
+        <p>Username: {{this.username}}</p>
+        <p>Email: {{this.email}}</p>
+    </div>
+    <div id="beatsDiv" class="contentDiv">
+        <p>Beats!</p>
+        <mat-expansion-panel id="beat" *ngFor="let beat of beats">
+            <mat-expansion-panel-header>{{ beat.title }}</mat-expansion-panel-header>
+            <h2>{{ beat.summary }}</h2>
+            <button id="expansionButtons" mat-raised-button (click)="updateBeat(beat)">Update Beat(WIP)</button>
+            <button id="expansionButtons" mat-raised-button >Delete Beat(WIP)</button>
+        </mat-expansion-panel>
+    </div>
+</body>

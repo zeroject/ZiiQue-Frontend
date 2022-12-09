@@ -5,11 +5,12 @@ import jwtDecode from "jwt-decode";
 import { User } from "../User"
 import {environment} from "../environments/environment";
 import {Router} from "@angular/router";
+import { BeatDTO } from '../app/beat-maker-page/profile-page/BeatDTO';
 
 
 export const customAxios = axios.create(
   {
-    baseURL: 'https:/localhost:7003/api',
+    baseURL: 'https://ziique-beatmaker-api.azurewebsites.net/api',
     headers: {
       Authorization: `bearer ${localStorage.getItem('token')}`
     }
@@ -29,32 +30,58 @@ export class HttpService {
 
   }
 
-async login(dto: any)
-{
-  const httpResult = await customAxios.post('Login/login', dto);
+  //Login Function
+  async login(dto: any) {
+    const httpResult = await customAxios.post('Login/login', dto);
     localStorage.setItem('token', httpResult.data);
-    let t = jwtDecode(httpResult.data)as User;
+    let t = jwtDecode(httpResult.data) as User;
     this.username_Email = t.username_Email;
     this.email = t.email;
     this.twoFA = t.twoFA.valueOf();
     await this.router.navigate(['./BeatMaker'])
-
-}
-
-async createUser(Dto: {username: any, password: any, email: any, is2FA: any}){
-    const httpResult = await customAxios.post("User/createUser", Dto).then()
-  {
-    return httpResult.status}
   }
-  async deleteUser(email: any){
+
+  // User Functions
+  async createUser(Dto: { username: any, password: any, email: any, is2FA: any }) {
+    const httpResult = await customAxios.post("User/createUser", Dto).then()
+    {
+      return httpResult.status
+    }
+  }
+
+  async deleteUser(email: any) {
     const httpResult = await customAxios.delete("User/deleteUser", email);
   }
-  async updateUser(username: any, email: any, twoFA: any){
-    let user : User = {email : email, twoFA: twoFA, username_Email: username}
+
+  async updateUser(username: any, email: any, twoFA: any) {
+    let user: User = { email: email, twoFA: twoFA, username_Email: username }
     const httpResult = await customAxios.put("User/updateUser", user).then()
     {
       return httpResult.status;
     }
   }
 
+  // Beat Functions
+  async getBeats() {
+    const httpResult = await customAxios.get('Beat/getBeats', this.email);
+    return httpResult.data
+  }
+
+  async createBeat(beatDTO: BeatDTO) {
+    beatDTO.userEmail = this.email;
+    const httpResult = await customAxios.post('Beat/createBeat', beatDTO);
+    return httpResult.data
+  }
+
+  async updateBeat(beatDTO: BeatDTO) {
+    beatDTO.userEmail = this.email;
+    const httpResult = await customAxios.put('Beat/updateBeat', beatDTO);
+    return httpResult.data
+  }
+  
+  async deleteBeat(beatDTO: BeatDTO) {
+    beatDTO.userEmail = this.email;
+    const httpResult = await customAxios.delete('Beat/deleteBeat', { data: beatDTO });
+    return httpResult.data
+  }
 }
