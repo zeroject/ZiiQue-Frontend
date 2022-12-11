@@ -8,7 +8,7 @@ import { SaveBeatPageComponent } from './save-beat-page/save-beat-page.component
 
 
 let names = ["A","B","C","D","E"]
-let NumberOfBars = 16;
+let NumberOfBars = 15;
 
 @Component({
   selector: 'app-beat-maker-page',
@@ -47,8 +47,8 @@ export class BeatMakerPageComponent implements OnInit {
     this.dialog.open(SaveBeatPageComponent, {
       height: '240px',
       width: '25%',
-      
-      
+
+
     });
   }
 
@@ -61,7 +61,7 @@ export class BeatMakerPageComponent implements OnInit {
     }
     let id =0;
     for (let i = 0; i < this.instrumentList.length; i++) {
-      for (let pos = 1; pos < NumberOfBars + 1; pos++) {
+      for (let pos = 0; pos < NumberOfBars + 1; pos++) {
         let node: Note = {
           position: pos,
           sound: this.instrumentList[i].nameN,

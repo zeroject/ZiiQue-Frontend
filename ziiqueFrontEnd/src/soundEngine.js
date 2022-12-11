@@ -140,52 +140,6 @@ function generateTime(note, bpm)
   return result
 }
 
-export function timer(bpm)
-{
-  let totalLength = ((bpm / 60) * 16) / 1000
-  let startTime;
-  let elapsed = 0;
-  let run = false;
-  let loopBool = true;
-
-  function start()
-  {
-    if (!run)
-    {
-      startTime = Date.now();
-      run = true;
-    }
-    else run = false
-  }
-
-  function loop()
-  {
-    if (!loopBool)
-    {
-      loopBool = true;
-    }
-    else loopBool = false
-  }
-
-  if (loopBool)
-  {
-    if (elapsed > totalLength)
-    {
-      startTime = Date.now()
-    }
-  }
-  else
-  {
-    run = false
-  }
-
-  while (run)
-  {
-    elapsed = Date.now() - startTime
-    return elapsed
-  }
-}
-
 function getInterval(bpm)
 {
   let result = [];
@@ -219,14 +173,14 @@ export function startBeating(Seq, bpm){
     for (let i = 0; i < soundBank.length; i++) {
       let j = 0;
 
-      intervalId.push(setInterval(track, (1 / (bpm / 60)) * 1000));
+      intervalId.push(setInterval(track, (gap[1] * 1000)));
 
       function track() {
         if (soundBank[i].time === gap[j] * 1000) {
           console.log(soundBank[i].time + " : " + gap[j] + "")
           soundBank[i].howl.play("sound", false);
         }
-        if (j === gap.length || !gap) {
+        if (j === gap.length -1 || !gap) {
           j = 0
         } else {
           j++;
