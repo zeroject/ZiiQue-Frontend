@@ -12,8 +12,8 @@
     <div id="beatsDiv" class="contentDiv">
         <p>Beats!</p>
         <mat-expansion-panel id="beat" *ngFor="let beat of beats">
-            <mat-expansion-panel-header>{{ beat.title }}</mat-expansion-panel-header>
-            <h2>{{ beat.summary }}</h2>
+            <mat-expansion-panel-header>{{ beat.Title }}</mat-expansion-panel-header>
+            <h2>{{ beat.Summary }}</h2>
             <button id="expansionButtons" mat-raised-button (click)="updateBeat(beat)">Update Beat(WIP)</button>
             <button id="expansionButtons" mat-raised-button >Delete Beat(WIP)</button>
         </mat-expansion-panel>

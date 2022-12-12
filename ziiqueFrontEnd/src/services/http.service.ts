@@ -68,19 +68,19 @@ export class HttpService {
   }
 
   async createBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
+    beatDTO.UserEmail = this.email;
     const httpResult = await customAxios.post('Beat/createBeat', beatDTO );
     return httpResult.data
   }
 
   async updateBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
+    beatDTO.UserEmail = this.email;
     const httpResult = await customAxios.put('Beat/updateBeat', beatDTO);
     return httpResult.data
   }
   
   async deleteBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
+    beatDTO.UserEmail = this.email;
     const httpResult = await customAxios.delete('Beat/deleteBeat', { data: beatDTO });
     return httpResult.data
   }

@@ -5,6 +5,7 @@ import * as sound from "../../soundEngine";
 import { MatDialog } from '@angular/material/dialog';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SaveBeatPageComponent } from './save-beat-page/save-beat-page.component';
+import { HelperService } from '../../services/helper.service';
 
 
 let names = ["A","B","C","D","E"]
@@ -23,10 +24,10 @@ export class BeatMakerPageComponent implements OnInit {
   bpm: number = 120;
   imgPath: string = "assets/play.png"
   isPlaying: boolean = false;
+  beatString: string = "";
 
 
-
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private helper: HelperService) {
 
   }
 
@@ -45,6 +46,8 @@ export class BeatMakerPageComponent implements OnInit {
   }
 
   saveBeat() {
+    this.helper.setBeatString(this.convertNodeToSeqStr().toString().replace(/,/g, "") + ":");
+
     this.dialog.open(SaveBeatPageComponent, {
       height: '240px',
       width: '25%',
@@ -118,7 +121,6 @@ export class BeatMakerPageComponent implements OnInit {
         result.push("" + sorted[i].position + sorted[i].sound + ";")
       for (let j = 0; j < sorted.length; j++) {
       }
-      console.log("nodeToString: " +  result[i])
     }
     return result;
     }

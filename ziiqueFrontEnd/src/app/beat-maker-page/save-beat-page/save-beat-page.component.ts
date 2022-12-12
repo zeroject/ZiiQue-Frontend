@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HelperService } from '../../../services/helper.service';
 import { HttpService } from '../../../services/http.service';
-import { BeatMakerPageComponent } from '../beat-maker-page.component';
 import { BeatDTO } from '../profile-page/BeatDTO';
 
 @Component({
@@ -12,9 +12,8 @@ import { BeatDTO } from '../profile-page/BeatDTO';
 export class SaveBeatPageComponent implements OnInit {
   title: string = "";
   summary: string = "";
-  
 
-  constructor(private http: HttpService, private beatmaker: BeatMakerPageComponent, private snackbar: MatSnackBar) {
+  constructor(private http: HttpService, private snackbar: MatSnackBar, private helper: HelperService) {
   }
 
   ngOnInit(): void {
@@ -25,12 +24,11 @@ export class SaveBeatPageComponent implements OnInit {
       this.snackbar.open("Remember to enter a title for your beat", "Ok")
     }
     let beatDTO: BeatDTO = {
-      title: this.title,
-      summary: this.summary,
-      beatstring: this.beatmaker.convertNodeToSeqStr().toString() + ":",
-      userEmail: this.http.email
+      Title: this.title,
+      Summary: this.summary,
+      BeatString: this.helper.getBeatString(),
+      UserEmail: this.http.email
     };
-    localStorage.getItem('token');
     await this.http.createBeat(beatDTO);
   }
 
