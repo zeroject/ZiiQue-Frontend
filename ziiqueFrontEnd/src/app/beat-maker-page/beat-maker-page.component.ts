@@ -108,6 +108,7 @@ export class BeatMakerPageComponent implements OnInit {
 
 
     loadSavedNotes(stringOfNodes : string) {
+      this.sortAllSeq = []
       let strNodes
       strNodes = stringOfNodes.split(";")
       strNodes.pop()
@@ -129,6 +130,7 @@ export class BeatMakerPageComponent implements OnInit {
             if (this.instrumentList[i].notes[j].sound === ssou && this.instrumentList[i].notes[j].position === spos)
             {
               this.instrumentList[i].notes[j].isToggled = true;
+              this.sortAllSeq.push(this.instrumentList[i].notes[j])
             }
           }
         }
