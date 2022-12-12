@@ -20,11 +20,12 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatDialogModule } from '@angular/material/dialog';
 import { SaveBeatPageComponent } from './beat-maker-page/save-beat-page/save-beat-page.component';
+import { HttpService } from '../services/http.service';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
   { path: 'BeatMaker', component: BeatMakerPageComponent },
-  { path: '**', redirectTo:'BeatMaker'},
+  { path: '**', redirectTo:'Login'},
 ];
 
 @NgModule({
@@ -54,7 +55,7 @@ const routes: Routes = [
     MatDialogModule
   ],
   providers: [
-
+    BeatMakerPageComponent
   ],
   bootstrap: [AppComponent]
 })

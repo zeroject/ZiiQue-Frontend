@@ -57,7 +57,8 @@ export class LoginPageComponent implements OnInit {
       // @ts-ignore
       this.formbox.style.webkitFilter = "blur(1rem)"
       this.loading.style.zIndex = "10";
-      var token = await this.http.login(dto).catch(reason =>{
+      await this.http.login(dto).then(() => {
+      }).catch(() =>{
         // @ts-ignore
         this.loading.style.opacity = "0";
         // @ts-ignore
@@ -65,8 +66,8 @@ export class LoginPageComponent implements OnInit {
         this.loading.style.zIndex = "-10";
         this.snackbar.open("Username/Email or Password was incorrect", "Ok")
       })
-      // @ts-ignore
-      localStorage.setItem('token', token)
+ 
+      
     }
   }
 
