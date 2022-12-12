@@ -107,6 +107,34 @@ export class BeatMakerPageComponent implements OnInit {
     }
 
 
+    loadSavedNotes(stringOfNodes : string) {
+      let strNodes
+      strNodes = stringOfNodes.split(";")
+      strNodes.pop()
+      let spos;
+      let ssou;
+      for (let i = 0; i < this.instrumentList.length; i++) {
+        for (let j = 0; j < this.instrumentList[i].notes.length; j++) {
+          for (let k = 0; k < strNodes.length; k++) {
+            let snum = Number(strNodes[k].charAt(1))
+            if (isNaN(snum))
+            {
+               ssou = strNodes[k].charAt(1)
+              spos = strNodes[k].charAt(0)
+            }
+            else {
+              ssou = strNodes[k].charAt(2)
+              spos =  Number(strNodes[k].substring(0, 2))
+            }
+            if (this.instrumentList[i].notes[j].sound === ssou && this.instrumentList[i].notes[j].position === spos)
+            {
+              this.instrumentList[i].notes[j].isToggled = true;
+            }
+          }
+        }
+      }
+    }
+
 
 //converts all nodes applied and sorts them into a single array of Notes, from first position to last position
   convertNodeToSeqStr() : string[]
