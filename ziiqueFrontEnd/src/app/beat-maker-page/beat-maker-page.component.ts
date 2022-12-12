@@ -21,7 +21,8 @@ export class BeatMakerPageComponent implements OnInit {
   sortAllSeq: Note[] = [];
   demoNode: Note[] = []
   bpm: number = 120;
-
+  imgPath: string = "assets/play.png"
+  isPlaying: boolean = false;
 
 
 
@@ -143,17 +144,25 @@ export class BeatMakerPageComponent implements OnInit {
     let result : string[] = []
     let sorted : Note[] = this.sortSeq(this.sortAllSeq)
     for (let i = 0; i < sorted.length; i++) {
-        result.push("" + sorted[i].position + sorted[i].sound)
+        result.push("" + sorted[i].position + sorted[i].sound + ";")
       for (let j = 0; j < sorted.length; j++) {
       }
       console.log("nodeToString: " +  result[i])
-      }
+    }
     return result;
     }
 
 //(click) plays the sequence
   play() {
-  sound.startBeating(this.convertNodeToSeqStr(), this.bpm)
+    sound.startBeating(this.convertNodeToSeqStr(), this.bpm)
+    if (!this.isPlaying) {
+      this.isPlaying = true;
+      this.imgPath = "assets/pause.png"
+    }
+    else {
+      this.isPlaying = false;
+      this.imgPath = "assets/play.png"
+    }
   }
 
   startBeating() {

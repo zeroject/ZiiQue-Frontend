@@ -69,7 +69,7 @@ export class HttpService {
 
   async createBeat(beatDTO: BeatDTO) {
     beatDTO.userEmail = this.email;
-    const httpResult = await customAxios.post('Beat/createBeat', beatDTO);
+    const httpResult = await customAxios.post('Beat/createBeat', beatDTO );
     return httpResult.data
   }
 
