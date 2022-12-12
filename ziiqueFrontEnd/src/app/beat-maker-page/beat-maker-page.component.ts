@@ -6,8 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SaveBeatPageComponent } from './save-beat-page/save-beat-page.component';
 
+
 let names = ["A","B","C","D","E"]
-let NumberOfBars = 16;
+let NumberOfBars = 15;
 
 @Component({
   selector: 'app-beat-maker-page',
@@ -17,8 +18,10 @@ let NumberOfBars = 16;
 
 export class BeatMakerPageComponent implements OnInit {
   instrumentList: Instruments[] = [];
-  demoNode: Note[] = [];
-  sequence: Note[] = [];
+  sortAllSeq: Note[] = [];
+  demoNode: Note[] = []
+  bpm: number = 120;
+
 
 
 
@@ -44,53 +47,88 @@ export class BeatMakerPageComponent implements OnInit {
     this.dialog.open(SaveBeatPageComponent, {
       height: '240px',
       width: '25%',
-      
-      
+
+
     });
+  }
+
+
+  //creates instruments according to the names array. and the amount of nodes per instrument. set by the NumberOfBars.
+  createInstruments() {
+    for (let i = 0; i < names.length; i++) {
+      let instrument: Instruments = {notes: [], nameN: names[i]}
+      this.instrumentList.push(instrument)
+    }
+    let id =0;
+    for (let i = 0; i < this.instrumentList.length; i++) {
+      for (let pos = 0; pos < NumberOfBars + 1; pos++) {
+        let node: Note = {
+          position: pos,
+          sound: this.instrumentList[i].nameN,
+          isToggled: false,
+          id: id
+        }
+        id++
+        this.instrumentList[i].notes.push(node)
+      }
+    }
+    }
+
+  //creates the demo notes to be shown in the gui.
+  createDemoIns() {
+    for (let i = 0; i < names.length; i++) {
+      let node: Note = {position: 0, sound: names[i], isToggled: false, id: i}
+      this.demoNode.push(node)
+    }
+  }
+//plays the note pressed in the gui
+  playDemo(note: Note) {
+    sound.demoNode(note.sound)
+  }
+
+  //(click) adds the note pressed to the total sequence
+  addNote(note: Note) {
+    if (!note.isToggled) {
+      note.isToggled = true;
+      this.sortAllSeq.push(note)
+      }
+     else {
+      note.isToggled = false;
+          this.sortAllSeq =  this.sortAllSeq.filter(b => b.id !== note.id);
+          console.log(this.sortAllSeq.length)
+      }
+    }
+
+
+
+  //sorts an array of notes by the position. from first position to last.
+  sortSeq(allSeq : Note[]) {
+    return  allSeq = allSeq.sort((a, b) => (a.position < b.position ? -1 : 1))
+    }
+
+
+
+//converts all nodes applied and sorts them into a single array of Notes, from first position to last position
+  convertNodeToSeqStr() : string[]
+  {
+    let result : string[] = []
+    let sorted : Note[] = this.sortSeq(this.sortAllSeq)
+    for (let i = 0; i < sorted.length; i++) {
+        result.push("" + sorted[i].position + sorted[i].sound)
+      for (let j = 0; j < sorted.length; j++) {
+      }
+      console.log("nodeToString: " +  result[i])
+      }
+    return result;
+    }
+
+//(click) plays the sequence
+  play() {
+  sound.startBeating(this.convertNodeToSeqStr(), this.bpm)
   }
 
   startBeating() {
 
   }
-
-  createInstruments()
-  {
-    for (let i = 0; i < names.length; i++) {
-        let instrument : Instruments = {notes: [], nameN: names[i]}
-        this.instrumentList.push(instrument)
-    }
-    for (let i = 0; i < this.instrumentList.length; i++) {
-      for (let pos = 1; pos < NumberOfBars+1; pos++) {
-        let node:Note = {position: pos+"" + this.instrumentList[i].nameN, sound: this.instrumentList[i].nameN, isToggled: false}
-        this.instrumentList[i].notes.push(node)
-      }
-    }
-  }
-
-  createDemoIns()
-  {
-    for (let i = 0; i < names.length; i++) {
-      let node : Note = {position: 0+ names[i], sound: names[i], isToggled: false}
-      this.demoNode.push(node)
-      console.log(this.demoNode[i].position.includes("A", 1))
-    }
-  }
-
-  addNote(note: Note) {
-    console.log(note.position, note.isToggled)
-    if (note.isToggled)
-    {
-      note.isToggled = false;
-       this.sequence = this.sequence.filter(n => n.position !== note.position)
-    }
-    else{
-      note.isToggled = true;
-      this.sequence.push(note)
-    }
-
-  }
-
-  playDemo(note: Note) {
-    sound.demoNode(note.sound)
-  }
 }
+

@@ -24,7 +24,7 @@ import { SaveBeatPageComponent } from './beat-maker-page/save-beat-page/save-bea
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
   { path: 'BeatMaker', component: BeatMakerPageComponent },
-  { path: '**', redirectTo:'Login'},
+  { path: '**', redirectTo:'BeatMaker'},
 ];
 
 @NgModule({

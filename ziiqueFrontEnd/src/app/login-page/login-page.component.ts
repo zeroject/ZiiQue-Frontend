@@ -18,10 +18,12 @@ export class LoginPageComponent implements OnInit {
   strengthvalue: any;
   isEmailTrue: any;
   email: any;
-  HttpStatus: number;
+  HttpStatus: number | void;
   x: any;
   y: any;
   z: any;
+  formbox: any;
+  loading: any;
 
   strength(event: any) {
     this.strengthvalue = event
@@ -33,10 +35,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = document.getElementById("loading");
+    this.formbox = document.getElementById("form-box");
   }
 
   async Submit() {
-    var loading = document.getElementById("loading-img");
     if (!this.Username_Email) {
       this.snackbar.open("Remember to enter either your email or username", "Ok")
     }
@@ -45,14 +48,22 @@ export class LoginPageComponent implements OnInit {
     } else{
       let dto = {
         Username_Email: this.Username_Email,
+
         password: this.password
 
       }
       // @ts-ignore
-      loading.style.opacity = "100";
+      this.loading.style.opacity = "100";
+      // @ts-ignore
+      this.formbox.style.webkitFilter = "blur(1rem)"
+      this.loading.style.zIndex = "10";
       var token = await this.http.login(dto).catch(reason =>{
         // @ts-ignore
-        loading.style.opacity = "0";
+        this.loading.style.opacity = "0";
+        // @ts-ignore
+        this.formbox.style.webkitFilter = "blur(0rem)"
+        this.loading.style.zIndex = "-10";
+        this.snackbar.open("Username/Email or Password was incorrect", "Ok")
       })
       // @ts-ignore
       localStorage.setItem('token', token)
@@ -69,31 +80,67 @@ export class LoginPageComponent implements OnInit {
             password: this.password,
             is2FA: false
           }
-          this.HttpStatus = await this.http.createUser(dto)
+          // @ts-ignore
+          this.loading.style.opacity = "100";
+          // @ts-ignore
+          this.formbox.style.webkitFilter = "blur(1rem)"
+          this.loading.style.zIndex = "10";
+          this.HttpStatus = await this.http.createUser(dto).catch(reason => {
+            // @ts-ignore
+            this.loading.style.opacity = "0";
+            // @ts-ignore
+            this.formbox.style.webkitFilter = "blur(0rem)"
+            this.loading.style.zIndex = "-10";
+          })
           if(this.HttpStatus == 201)
           {
             this.snackbar.open("User Created", "Ok")
+            // @ts-ignore
+            this.loading.style.opacity = "0";
+            // @ts-ignore
+            this.formbox.style.webkitFilter = "blur(0rem)"
+            this.loading.style.zIndex = "-10";
+            this.SwitchLogin();
           }
           else {
             this.snackbar.open("Username or Email is already taken", "Ok")
+            // @ts-ignore
+            this.loading.style.opacity = "0";
+            // @ts-ignore
+            this.formbox.style.webkitFilter = "blur(0rem)"
+            this.loading.style.zIndex = "-10";
           }
         }
         else {
           this.snackbar.open("Your email is not valid", "Ok")
+          // @ts-ignore
+          this.loading.style.opacity = "0";
+          // @ts-ignore
+          this.formbox.style.webkitFilter = "blur(0rem)"
+          this.loading.style.zIndex = "-10";
         }
       }
       else {
         this.snackbar.open("Your passwords dont match", "Ok")
+        // @ts-ignore
+        this.loading.style.opacity = "0";
+        // @ts-ignore
+        this.formbox.style.webkitFilter = "blur(0rem)"
+        this.loading.style.zIndex = "-10";
       }
     }
     else {
       this.snackbar.open("Your passwords is not strong enough", "Ok")
+      // @ts-ignore
+      this.loading.style.opacity = "0";
+      // @ts-ignore
+      this.formbox.style.webkitFilter = "blur(0rem)"
+      this.loading.style.zIndex = "-10";
     }
 
   }
 
   SwitchLogin(){
-    console.log('ijliji')
     var x = document.getElementById("login");
     var y = document.getElementById("register");
     var z = document.getElementById("btn");
@@ -112,7 +159,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   SwitchRegister() {
-    console.log('jhgfdhy')
     var x = document.getElementById("login");
     var y = document.getElementById("register");
     var z = document.getElementById("btn");
