@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import jwtDecode from 'jwt-decode';
+import { HelperService } from '../../../services/helper.service';
 import { HttpService } from '../../../services/http.service';
 import { User } from '../../../User';
 import { BeatDTO } from './BeatDTO';
@@ -10,17 +12,18 @@ import { BeatDTO } from './BeatDTO';
 })
 export class ProfilePageComponent implements OnInit {
   beats: BeatDTO[] = [];
-  username!: string;
-  email!: string;
-  twoFA!: boolean;
+  user: User = {
+    email: "",
+    username_Email: "",
+    twoFA: false
+  };
 
-  constructor(private http: HttpService) { }
+
+  constructor(private http: HttpService, private helper: HelperService) { }
 
   async ngOnInit() {
+    this.goToProfile();
     this.beats = await this.http.getBeats();
-    this.username = this.http.username_Email;
-    this.email = this.http.email;
-    this.twoFA = this.http.twoFA;
   }
 
   async updateBeat(beatDTO: BeatDTO) {
@@ -32,6 +35,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   goToProfile() {
+    this.user = this.helper.getUser();
     // @ts-ignore
     document.getElementById("profileDiv").style.zIndex = "100";
     // @ts-ignore

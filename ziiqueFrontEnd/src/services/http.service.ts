@@ -6,6 +6,7 @@ import { User } from "../User"
 import {environment} from "../environments/environment";
 import {Router} from "@angular/router";
 import { BeatDTO } from '../app/beat-maker-page/profile-page/BeatDTO';
+import { HelperService } from './helper.service';
 
 
 export const customAxios = axios.create(
@@ -26,7 +27,7 @@ export class HttpService {
   twoFA: any;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private helper: HelperService) {
 
   }
 
@@ -35,6 +36,7 @@ export class HttpService {
     const httpResult = await customAxios.post('Login/login', dto);
     localStorage.setItem('token', httpResult.data);
     let t = jwtDecode(httpResult.data) as User;
+    this.helper.setUser(t);
     this.username_Email = t.username_Email;
     this.email = t.email;
     this.twoFA = t.twoFA.valueOf();
