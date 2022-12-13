@@ -7,8 +7,8 @@
     <div id="profileDiv" class="contentDiv">
         <p>Username: {{this.user.username_Email}}</p>
         <p>Email: {{this.user.email}}</p>
-        <button class="profileUpdate" mat-raised-button>Save Changes</button>
-        <button class="profileDelete" mat-raised-button (Click)="deletePopUp()">Delete Profile</button>
+        <!--<button class="profileUpdate" mat-raised-button>Save Changes</button> -->
+        <button class="profileDelete" mat-raised-button (click)="deletePopUp()">Delete Profile</button>
     </div>
     <div id="beatsDiv" class="contentDiv">
         <mat-expansion-panel id="beat" *ngFor="let beat of beats">

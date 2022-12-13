@@ -42,8 +42,8 @@ export class ProfilePageComponent implements OnInit {
 
   deletePopUp() {
     this.dialog.open(DeleteProfilePopupComponent, {
-      height: '50px',
-      width: '100px',
+      height: 'fit-content',
+      width: 'fit-content',
     });
   }
 

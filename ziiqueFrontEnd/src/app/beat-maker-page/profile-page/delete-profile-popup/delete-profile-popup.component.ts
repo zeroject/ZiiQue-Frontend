@@ -12,4 +12,12 @@ export class DeleteProfilePopupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteProfile() {
+
+  }
+
+  goBack() {
+
+  }
+
 }

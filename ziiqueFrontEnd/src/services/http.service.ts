@@ -63,7 +63,9 @@ export class HttpService {
 
   // Beat Functions
   async getBeats() {
-    const httpResult = await customAxios.get('Beat/getBeats', this.email);
+    let userEmail_: string = this.helper.getUser().email;
+    const httpResult = await customAxios.get('Beat/getBeats/' + userEmail_);
+    console.log(httpResult.data)
     return httpResult.data
   }
 

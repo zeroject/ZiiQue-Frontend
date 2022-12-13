@@ -46,7 +46,7 @@ export class BeatMakerPageComponent implements OnInit {
   }
 
   saveBeat() {
-    this.helper.setBeatString(this.convertNodeToSeqStr().toString().replace(/,/g, "") + ":");
+    this.helper.setBeatString(this.convertNodeToSeqStr().toString().replace(/,/g, ""));
 
     this.dialog.open(SaveBeatPageComponent, {
       height: '240px',
