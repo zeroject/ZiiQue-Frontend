@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import jwtDecode from 'jwt-decode';
 import { HelperService } from '../../../services/helper.service';
 import { HttpService } from '../../../services/http.service';
 import { User } from '../../../User';
 import { BeatDTO } from './BeatDTO';
+import { DeleteProfilePopupComponent } from './delete-profile-popup/delete-profile-popup.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -18,7 +20,7 @@ export class ProfilePageComponent implements OnInit {
   };
 
 
-  constructor(private http: HttpService, private helper: HelperService) { }
+  constructor(private http: HttpService, private helper: HelperService, private dialog: MatDialog) { }
 
   async ngOnInit() {
     this.setUser();
@@ -36,6 +38,13 @@ export class ProfilePageComponent implements OnInit {
   setUser() {
     this.user = this.helper.getUser();
     this.goToProfile();
+  }
+
+  deletePopUp() {
+    this.dialog.open(DeleteProfilePopupComponent, {
+      height: '50px',
+      width: '100px',
+    });
   }
 
   goToProfile() {

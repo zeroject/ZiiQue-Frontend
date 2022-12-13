@@ -39,6 +39,20 @@ mat-button-toggle-group {
     z-index: 100;
 }
 
+.profileDelete {
+  bottom: 10px;
+  left: 0px;
+  width: 49%;
+  position: absolute;
+}
+
+.profileUpdate {
+  bottom: 10px;
+  right: 0px;
+  width: 49%;
+  position: absolute;
+}
+
 #beatsDiv{
     z-index: 99;
 }

@@ -42,7 +42,7 @@ export class HttpService {
   }
 
   // User Functions
-  async createUser(Dto: { username: any, password: any, email: any, is2FA: any }) {
+  async createUser(Dto: { username: any, password: any, email: any }) {
     const httpResult = await customAxios.post("User/createUser", Dto).then()
     {
       return httpResult.status
@@ -53,7 +53,7 @@ export class HttpService {
     const httpResult = await customAxios.delete("User/deleteUser", email);
   }
 
-  async updateUser(username: any, email: any, twoFA: any) {
+  async updateUser(username: any, email: any) {
     let user: User = { email: email, username_Email: username }
     const httpResult = await customAxios.put("User/updateUser", user).then()
     {

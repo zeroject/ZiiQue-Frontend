@@ -79,7 +79,6 @@ export class LoginPageComponent implements OnInit {
             username: this.Username_Email,
             email: this.email,
             password: this.password,
-            is2FA: false
           }
           // @ts-ignore
           this.loading.style.opacity = "100";

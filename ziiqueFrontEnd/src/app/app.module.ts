@@ -21,6 +21,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatDialogModule } from '@angular/material/dialog';
 import { SaveBeatPageComponent } from './beat-maker-page/save-beat-page/save-beat-page.component';
 import { HttpService } from '../services/http.service';
+import { DeleteProfilePopupComponent } from './beat-maker-page/profile-page/delete-profile-popup/delete-profile-popup.component';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
     LoginPageComponent,
     BeatMakerPageComponent,
     ProfilePageComponent,
-    SaveBeatPageComponent
+    SaveBeatPageComponent,
+    DeleteProfilePopupComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
