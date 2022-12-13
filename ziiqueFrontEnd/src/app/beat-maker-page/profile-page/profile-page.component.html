@@ -14,8 +14,9 @@
         <mat-expansion-panel id="beat" *ngFor="let beat of beats">
             <mat-expansion-panel-header>{{ beat.Title }}</mat-expansion-panel-header>
             <h2>{{ beat.Summary }}</h2>
+            <button id="expansionButtons" mat-raised-button (click)="loadBeat()">Load Beat(WIP)</button>
             <button id="expansionButtons" mat-raised-button (click)="updateBeat(beat)">Update Beat(WIP)</button>
-            <button id="expansionButtons" mat-raised-button >Delete Beat(WIP)</button>
+            <button id="expansionButtons" mat-raised-button (click)="deleteBeat()">Delete Beat(WIP)</button>
         </mat-expansion-panel>
     </div>
 </body>
