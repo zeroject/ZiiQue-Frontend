@@ -24,7 +24,6 @@ export const customAxios = axios.create(
 export class HttpService {
   username_Email: any;
   email: any;
-  twoFA: any;
 
 
   constructor(private router: Router, private helper: HelperService) {
@@ -39,7 +38,6 @@ export class HttpService {
     this.helper.setUser(t);
     this.username_Email = t.username_Email;
     this.email = t.email;
-    this.twoFA = t.twoFA.valueOf();
     await this.router.navigate(['./BeatMaker'])
   }
 
@@ -56,7 +54,7 @@ export class HttpService {
   }
 
   async updateUser(username: any, email: any, twoFA: any) {
-    let user: User = { email: email, twoFA: twoFA, username_Email: username }
+    let user: User = { email: email, username_Email: username }
     const httpResult = await customAxios.put("User/updateUser", user).then()
     {
       return httpResult.status;

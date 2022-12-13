@@ -15,7 +15,6 @@ export class ProfilePageComponent implements OnInit {
   user: User = {
     email: "",
     username_Email: "",
-    twoFA: false
   };
 
 

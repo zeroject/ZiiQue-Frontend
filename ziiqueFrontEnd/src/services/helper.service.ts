@@ -9,7 +9,6 @@ export class HelperService {
   user: User = {
     email: "",
     username_Email: "",
-    twoFA: false
   };
 
   constructor() { }
