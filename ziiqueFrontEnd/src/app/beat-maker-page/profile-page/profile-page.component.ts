@@ -14,30 +14,36 @@ import { DeleteProfilePopupComponent } from './delete-profile-popup/delete-profi
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
-  beats: BeatDTO[] = [];
+
   user: User = {
     email: "",
     username_Email: "",
   };
 
+ beats: BeatDTO[] = []
 
-  constructor(private http: HttpService, private helper: HelperService, private dialog: MatDialog, private comp: BeatMakerPageComponent) { }
+
+
+  constructor(private http: HttpService, private helper: HelperService, private dialog: MatDialog, private comp: BeatMakerPageComponent) {
+
+  }
 
   async ngOnInit() {
     this.setUser();
-    this.beats = await this.http.getBeats();
+    this.beats = await this.http.getBeats()
+    console.log(this.beats[0].beatString)
   }
 
   async updateBeat(beatDTO: BeatDTO) {
     await this.http.updateBeat(beatDTO);
   }
-  
+
   async deleteBeat(beatDTO: BeatDTO) {
     await this.http.deleteBeat(beatDTO);
   }
 
   loadBeat(beatDTO: BeatDTO) {
-    this.comp.loadSavedNotes(beatDTO.BeatString);
+    this.comp.loadSavedNotes(beatDTO.beatString);
   }
 
   setUser() {

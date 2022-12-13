@@ -111,7 +111,7 @@ export class BeatMakerPageComponent implements OnInit {
   }
 
   loadSavedNotes(stringOfNodes: string) {
-    let strNodes
+    let strNodes : string[] = []
     this.sortAllSeq = [];
     strNodes = stringOfNodes.split(";")
     strNodes.pop()

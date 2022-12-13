@@ -24,10 +24,10 @@ export class SaveBeatPageComponent implements OnInit {
       this.snackbar.open("Remember to enter a title for your beat", "Ok")
     }
     let beatDTO: BeatDTO = {
-      Title: this.title,
-      Summary: this.summary,
-      BeatString: this.helper.getBeatString(),
-      UserEmail: this.http.email
+      title: this.title,
+      summary: this.summary,
+      beatString: this.helper.getBeatString(),
+      userEmail: this.http.email
     };
     await this.http.createBeat(beatDTO);
   }

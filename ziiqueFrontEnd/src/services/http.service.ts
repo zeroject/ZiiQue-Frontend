@@ -63,26 +63,25 @@ export class HttpService {
 
   // Beat Functions
   async getBeats() {
-    let userEmail_: string = this.helper.getUser().email;
+    let userEmail_: string = this.helper.getUser().username_Email;
     const httpResult = await customAxios.get('Beat/getBeats/' + userEmail_);
-    console.log(httpResult.data)
     return httpResult.data
   }
 
   async createBeat(beatDTO: BeatDTO) {
-    beatDTO.UserEmail = this.email;
+    beatDTO.userEmail = this.email;
     const httpResult = await customAxios.post('Beat/createBeat', beatDTO );
     return httpResult.data
   }
 
   async updateBeat(beatDTO: BeatDTO) {
-    beatDTO.UserEmail = this.email;
+    beatDTO.userEmail = this.email;
     const httpResult = await customAxios.put('Beat/updateBeat', beatDTO);
     return httpResult.data
   }
-  
+
   async deleteBeat(beatDTO: BeatDTO) {
-    beatDTO.UserEmail = this.email;
+    beatDTO.userEmail = this.email;
     const httpResult = await customAxios.delete('Beat/deleteBeat', { data: beatDTO });
     return httpResult.data
   }
