@@ -22,7 +22,7 @@ export class ProfilePageComponent implements OnInit {
   constructor(private http: HttpService, private helper: HelperService) { }
 
   async ngOnInit() {
-    this.goToProfile();
+    this.setUser();
     this.beats = await this.http.getBeats();
   }
 
@@ -34,8 +34,12 @@ export class ProfilePageComponent implements OnInit {
     await this.http.deleteBeat(beatDTO);
   }
 
-  goToProfile() {
+  setUser() {
     this.user = this.helper.getUser();
+    this.goToProfile();
+  }
+
+  goToProfile() {
     // @ts-ignore
     document.getElementById("profileDiv").style.zIndex = "100";
     // @ts-ignore
