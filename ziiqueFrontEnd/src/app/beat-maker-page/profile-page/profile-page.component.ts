@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { HelperService } from '../../../services/helper.service';
 import { HttpService } from '../../../services/http.service';
 import { User } from '../../../User';
+import { BeatMakerPageComponent } from '../beat-maker-page.component';
 import { BeatDTO } from './BeatDTO';
 import { DeleteProfilePopupComponent } from './delete-profile-popup/delete-profile-popup.component';
 
@@ -20,7 +21,7 @@ export class ProfilePageComponent implements OnInit {
   };
 
 
-  constructor(private http: HttpService, private helper: HelperService, private dialog: MatDialog) { }
+  constructor(private http: HttpService, private helper: HelperService, private dialog: MatDialog, private comp: BeatMakerPageComponent) { }
 
   async ngOnInit() {
     this.setUser();
@@ -33,6 +34,10 @@ export class ProfilePageComponent implements OnInit {
   
   async deleteBeat(beatDTO: BeatDTO) {
     await this.http.deleteBeat(beatDTO);
+  }
+
+  loadBeat(beatDTO: BeatDTO) {
+    this.comp.loadSavedNotes(beatDTO.BeatString);
   }
 
   setUser() {

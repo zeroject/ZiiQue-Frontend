@@ -108,38 +108,35 @@ export class BeatMakerPageComponent implements OnInit {
   //sorts an array of notes by the position. from first position to last.
   sortSeq(allSeq : Note[]) {
     return  allSeq = allSeq.sort((a, b) => (a.position < b.position ? -1 : 1))
-    }
+  }
 
-
-    loadSavedNotes(stringOfNodes : string) {
-      let strNodes
-      strNodes = stringOfNodes.split(";")
-      strNodes.pop()
-      let spos;
-      let ssou;
-      for (let i = 0; i < this.instrumentList.length; i++) {
-        for (let j = 0; j < this.instrumentList[i].notes.length; j++) {
-          for (let k = 0; k < strNodes.length; k++) {
-            let snum = Number(strNodes[k].charAt(1))
-            if (isNaN(snum))
-            {
-               ssou = strNodes[k].charAt(1)
-              spos = strNodes[k].charAt(0)
-            }
-            else {
-              ssou = strNodes[k].charAt(2)
-              spos =  Number(strNodes[k].substring(0, 2))
-            }
-            if (this.instrumentList[i].notes[j].sound === ssou && this.instrumentList[i].notes[j].position === spos)
-            {
-              this.instrumentList[i].notes[j].isToggled = true;
-              this.sortAllSeq.push(this.instrumentList[i].notes[j])
-            }
+  loadSavedNotes(stringOfNodes: string) {
+    let strNodes
+    this.sortAllSeq = [];
+    strNodes = stringOfNodes.split(";")
+    strNodes.pop()
+    let spos;
+    let ssou;
+    for (let i = 0; i < this.instrumentList.length; i++) {
+      for (let j = 0; j < this.instrumentList[i].notes.length; j++) {
+        for (let k = 0; k < strNodes.length; k++) {
+          let snum = Number(strNodes[k].charAt(1))
+          if (isNaN(snum)) {
+            ssou = strNodes[k].charAt(1)
+            spos = strNodes[k].charAt(0)
+          }
+          else {
+            ssou = strNodes[k].charAt(2)
+            spos = Number(strNodes[k].substring(0, 2))
+          }
+          if (this.instrumentList[i].notes[j].sound === ssou && this.instrumentList[i].notes[j].position === spos) {
+            this.instrumentList[i].notes[j].isToggled = true;
+            this.sortAllSeq.push(this.instrumentList[i].notes[j])
           }
         }
       }
     }
-
+  }
 
 //converts all nodes applied and sorts them into a single array of Notes, from first position to last position
   convertNodeToSeqStr() : string[]
