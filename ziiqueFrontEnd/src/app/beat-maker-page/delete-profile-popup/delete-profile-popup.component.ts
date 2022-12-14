@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-delete-profile-popup',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteProfilePopupComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -17,7 +18,7 @@ export class DeleteProfilePopupComponent implements OnInit {
   }
 
   goBack() {
-
+    this.dialog.closeAll();
   }
 
 }

@@ -5,8 +5,8 @@ import jwtDecode from "jwt-decode";
 import { User } from "../User"
 import {environment} from "../environments/environment";
 import {Router} from "@angular/router";
-import { BeatDTO } from '../app/beat-maker-page/profile-page/BeatDTO';
 import { HelperService } from './helper.service';
+import { BeatDTO } from '../BeatDTO';
 
 
 export const customAxios = axios.create(

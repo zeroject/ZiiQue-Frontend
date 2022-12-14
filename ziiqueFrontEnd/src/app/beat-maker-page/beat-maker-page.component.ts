@@ -6,6 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SaveBeatPageComponent } from './save-beat-page/save-beat-page.component';
 import { HelperService } from '../../services/helper.service';
+import { BeatDTO } from '../../BeatDTO';
+import { User } from '../../User';
+import { HttpService } from '../../services/http.service';
+import { DeleteProfilePopupComponent } from './profile-page/delete-profile-popup/delete-profile-popup.component';
 
 
 let names = ["A","B","C","D","E"]
@@ -24,25 +28,39 @@ export class BeatMakerPageComponent implements OnInit {
   bpm: number = 120;
   imgPath: string = "assets/play.png"
   isPlaying: boolean = false;
+  isOpen: boolean = false;
   beatString: string = "";
 
+  beats: BeatDTO[] = []
+  user: User = {
+    email: "",
+    username_Email: "",
+  };
 
-  constructor(private dialog: MatDialog, private helper: HelperService) {
+
+  constructor(private dialog: MatDialog, private helper: HelperService, private http: HttpService) {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.createInstruments()
     this.createDemoIns()
 
+    this.setUser();
+    this.beats = await this.http.getBeats()
   }
 
   onClick() {
-    this.dialog.open(ProfilePageComponent, {
-      height: '100%',
-      width: '30%',
-      position: { right: "0" },
-    });
+    if (!this.isOpen) {
+      // @ts-ignore
+      document.getElementById("burgerDivMaster").style.zIndex = "100";
+      this.isOpen = true;
+    }
+    else {
+      // @ts-ignore
+      document.getElementById("burgerDivMaster").style.zIndex = "-100";
+      this.isOpen = false;
+    }
   }
 
   saveBeat() {
@@ -54,6 +72,47 @@ export class BeatMakerPageComponent implements OnInit {
 
 
     });
+  }
+
+  async updateBeat(beatDTO: BeatDTO) {
+    await this.http.updateBeat(beatDTO);
+  }
+
+  async deleteBeat(beatDTO: BeatDTO) {
+    await this.http.deleteBeat(beatDTO);
+  }
+
+  loadBeat(beatDTO: BeatDTO) {
+    // @ts-ignore
+    document.getElementById("burgerDivMaster").style.zIndex = "-100";
+    this.isOpen = false;
+    this.loadSavedNotes(beatDTO.beatString)
+  }
+
+  setUser() {
+    this.user = this.helper.getUser();
+    this.goToProfile();
+  }
+
+  deletePopUp() {
+    this.dialog.open(DeleteProfilePopupComponent, {
+      height: 'fit-content',
+      width: 'fit-content',
+    });
+  }
+
+  goToProfile() {
+    // @ts-ignore
+    document.getElementById("profilePage").style.zIndex = "100";
+    // @ts-ignore
+    document.getElementById("beatsPage").style.zIndex = "99";
+  }
+
+  goToBeats() {
+    // @ts-ignore
+    document.getElementById("profilePage").style.zIndex = "99";
+    // @ts-ignore
+    document.getElementById("beatsPage").style.zIndex = "100";
   }
 
 
@@ -111,7 +170,9 @@ export class BeatMakerPageComponent implements OnInit {
   }
 
   loadSavedNotes(stringOfNodes: string) {
-    let strNodes : string[] = []
+    console.log(stringOfNodes)
+
+    let strNodes: string[] = []
     this.sortAllSeq = [];
     strNodes = stringOfNodes.split(";")
     strNodes.pop()
@@ -123,15 +184,18 @@ export class BeatMakerPageComponent implements OnInit {
           let snum = Number(strNodes[k].charAt(1))
           if (isNaN(snum)) {
             ssou = strNodes[k].charAt(1)
-            spos = strNodes[k].charAt(0)
+            spos = Number(strNodes[k].charAt(0))
           }
           else {
             ssou = strNodes[k].charAt(2)
             spos = Number(strNodes[k].substring(0, 2))
           }
+          console.log(ssou + " " + spos)
           if (this.instrumentList[i].notes[j].sound === ssou && this.instrumentList[i].notes[j].position === spos) {
             this.instrumentList[i].notes[j].isToggled = true;
             this.sortAllSeq.push(this.instrumentList[i].notes[j])
+          } else {
+            console.log('gg')
           }
         }
       }

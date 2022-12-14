@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BeatDTO } from '../../../BeatDTO';
 import { HelperService } from '../../../services/helper.service';
 import { HttpService } from '../../../services/http.service';
-import { BeatDTO } from '../profile-page/BeatDTO';
 
 @Component({
   selector: 'app-save-beat-page',
