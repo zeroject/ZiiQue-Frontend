@@ -49,8 +49,9 @@ export class HttpService {
     }
   }
 
-  async deleteUser(email: any) {
-    const httpResult = await customAxios.delete("User/deleteUser", email);
+  async deleteUser() {
+    await customAxios.delete("User/deleteUser/" + this.email);
+    await this.router.navigate(['./Login'])
   }
 
   async updateUser(username: any, email: any) {

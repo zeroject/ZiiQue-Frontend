@@ -3,13 +3,12 @@ import {Instruments} from "./instruments";
 import {Note} from "./note";
 import * as sound from "../../soundEngine";
 import { MatDialog } from '@angular/material/dialog';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SaveBeatPageComponent } from './save-beat-page/save-beat-page.component';
 import { HelperService } from '../../services/helper.service';
 import { BeatDTO } from '../../BeatDTO';
 import { User } from '../../User';
 import { HttpService } from '../../services/http.service';
-import { DeleteProfilePopupComponent } from './profile-page/delete-profile-popup/delete-profile-popup.component';
+import { DeleteProfilePopupComponent } from './delete-profile-popup/delete-profile-popup.component';
 
 
 let names = ["A","B","C","D","E"]

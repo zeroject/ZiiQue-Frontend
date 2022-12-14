@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BeatMakerPageComponent } from './beat-maker-page/beat-maker-page.component';
-import { ProfilePageComponent } from './beat-maker-page/profile-page/profile-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -21,7 +20,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatDialogModule } from '@angular/material/dialog';
 import { SaveBeatPageComponent } from './beat-maker-page/save-beat-page/save-beat-page.component';
 import { HttpService } from '../services/http.service';
-import { DeleteProfilePopupComponent } from './beat-maker-page/profile-page/delete-profile-popup/delete-profile-popup.component';
+import { DeleteProfilePopupComponent } from './beat-maker-page/delete-profile-popup/delete-profile-popup.component';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
@@ -34,7 +33,6 @@ const routes: Routes = [
     AppComponent,
     LoginPageComponent,
     BeatMakerPageComponent,
-    ProfilePageComponent,
     SaveBeatPageComponent,
     DeleteProfilePopupComponent
   ],

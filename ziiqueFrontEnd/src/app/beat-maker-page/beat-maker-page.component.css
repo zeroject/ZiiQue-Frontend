@@ -244,6 +244,8 @@ mat-button-toggle-group {
   left: 0px;
   bottom: 20px;
   background-color: #5a5757;
+  border-radius: 5px;
+  padding-top: 5px;
 }
 
 #profilePage {
@@ -255,19 +257,35 @@ mat-button-toggle-group {
 }
 
 #profileDelete {
-  bottom: 10px;
-  left: 5px;
-  width: 49%;
-  position: absolute;
+    bottom: 10px;
+    left: 5px;
+    width: 49%;
+    position: absolute;
 }
 
 #profileUpdate {
-  bottom: 10px;
-  right: 5px;
-  width: 49%;
-  position: absolute;
+    bottom: 10px;
+    right: 5px;
+    width: 49%;
+    position: absolute;
 }
 
 .expansionButtons{
 
+}
+
+#beat{
+    margin: 4px;
+}
+
+.text {
+    font-size: 40px;
+    margin-top: 10px;
+    background-color: #6d6969;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.credentials{
+    font-size: 25px;
 }
