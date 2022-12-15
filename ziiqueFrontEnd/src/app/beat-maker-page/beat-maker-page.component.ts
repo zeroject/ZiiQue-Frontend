@@ -41,14 +41,20 @@ export class BeatMakerPageComponent implements OnInit {
 
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.createInstruments()
     this.createDemoIns()
 
     this.setUser();
+    this.loadBeats();
+  }
+
+  //loads beats from the database
+  async loadBeats() {
     this.beats = await this.http.getBeats()
   }
 
+  //opens the profile menu
   onClick() {
     if (!this.isOpen) {
       // @ts-ignore
@@ -62,25 +68,29 @@ export class BeatMakerPageComponent implements OnInit {
     }
   }
 
+  //opens a popup for saving beats and sends the beatstring to the helper service
   saveBeat() {
     this.helper.setBeatString(this.convertNodeToSeqStr().toString().replace(/,/g, ""));
 
     this.dialog.open(SaveBeatPageComponent, {
       height: '240px',
       width: '25%',
-
-
     });
+    this.loadBeats();
   }
 
+  //updates beats in the database
   async updateBeat(beatDTO: BeatDTO) {
     await this.http.updateBeat(beatDTO);
   }
 
+  //deleltes a beat from the database
   async deleteBeat(beatDTO: BeatDTO) {
     await this.http.deleteBeat(beatDTO);
+    this.loadBeats();
   }
 
+  //loads beats from the database
   loadBeat(beatDTO: BeatDTO) {
     // @ts-ignore
     document.getElementById("burgerDivMaster").style.zIndex = "-100";
@@ -88,11 +98,13 @@ export class BeatMakerPageComponent implements OnInit {
     this.loadSavedNotes(beatDTO.beatString)
   }
 
+  //sets the current logged in user
   setUser() {
     this.user = this.helper.getUser();
     this.goToProfile();
   }
 
+  //Opens the delete profile popup
   deletePopUp() {
     this.dialog.open(DeleteProfilePopupComponent, {
       height: 'fit-content',
@@ -100,6 +112,7 @@ export class BeatMakerPageComponent implements OnInit {
     });
   }
 
+  //Changes z index to show a diffrent Div
   goToProfile() {
     // @ts-ignore
     document.getElementById("profilePage").style.zIndex = "100";
@@ -107,6 +120,7 @@ export class BeatMakerPageComponent implements OnInit {
     document.getElementById("beatsPage").style.zIndex = "99";
   }
 
+  //Changes z index to show a diffrent Div
   goToBeats() {
     // @ts-ignore
     document.getElementById("profilePage").style.zIndex = "99";
@@ -225,10 +239,6 @@ export class BeatMakerPageComponent implements OnInit {
       this.isPlaying = false;
       this.imgPath = "assets/play.png"
     }
-  }
-
-  startBeating() {
-
   }
 }
 
