@@ -48,7 +48,6 @@ export class LoginPageComponent implements OnInit {
     } else{
       let dto = {
         Username_Email: this.Username_Email,
-
         password: this.password
 
       }

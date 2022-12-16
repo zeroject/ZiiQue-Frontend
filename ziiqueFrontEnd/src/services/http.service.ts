@@ -50,12 +50,12 @@ export class HttpService {
   }
 
   async deleteUser() {
-    await customAxios.delete("User/deleteUser/" + this.email);
+    await customAxios.delete("User/deleteUser/" + this.helper.getUser().username_Email);
     await this.router.navigate(['./Login'])
   }
 
   async updatePassword(pass: string) {
-    let user: UserDTO = { email: this.email, username: this.username, password: pass }
+    let user: UserDTO = { email: this.helper.getUser().username_Email, username: this.username, password: pass }
     const httpResult = await customAxios.put("User/updatePassword", user).then()
     {
       await this.router.navigate(['./Login'])
@@ -71,19 +71,19 @@ export class HttpService {
   }
 
   async createBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
+    beatDTO.userEmail = this.helper.getUser().username_Email;;
     const httpResult = await customAxios.post('Beat/createBeat', beatDTO );
     return httpResult.data
   }
 
   async updateBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
+    beatDTO.userEmail = this.helper.getUser().username_Email;;
     const httpResult = await customAxios.put('Beat/updateBeat', beatDTO);
     return httpResult.data
   }
 
   async deleteBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
+    beatDTO.userEmail = this.helper.getUser().username_Email;;
     const httpResult = await customAxios.delete('Beat/deleteBeat', { data: beatDTO });
     return httpResult.data
   }

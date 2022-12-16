@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BeatMakerPageComponent } from './beat-maker-page/beat-maker-page.component';
@@ -19,9 +18,9 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MatDialogModule } from '@angular/material/dialog';
 import { SaveBeatPageComponent } from './beat-maker-page/save-beat-page/save-beat-page.component';
-import { HttpService } from '../services/http.service';
 import { DeleteProfilePopupComponent } from './beat-maker-page/delete-profile-popup/delete-profile-popup.component';
 import { UpdateUserPageComponent } from './beat-maker-page/update-user-page/update-user-page.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
@@ -57,7 +56,7 @@ const routes: Routes = [
     MatDialogModule
   ],
   providers: [
-    BeatMakerPageComponent
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })

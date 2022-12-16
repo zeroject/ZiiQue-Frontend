@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import {Instruments} from "./instruments";
 import {Note} from "./note";
 import * as sound from "../../soundEngine";
@@ -10,6 +10,7 @@ import { User } from '../../User';
 import { HttpService } from '../../services/http.service';
 import { DeleteProfilePopupComponent } from './delete-profile-popup/delete-profile-popup.component';
 import { UpdateUserPageComponent } from './update-user-page/update-user-page.component';
+import jwtDecode from 'jwt-decode';
 
 
 let names = ["A","B","C","D","E"]
@@ -44,10 +45,10 @@ export class BeatMakerPageComponent implements OnInit {
   ngOnInit() {
     this.createInstruments()
     this.createDemoIns()
-
     this.setUser();
     this.loadBeats();
   }
+
 
   //loads beats from the database
   async loadBeats() {
@@ -119,7 +120,9 @@ export class BeatMakerPageComponent implements OnInit {
 
   //sets the current logged in user
   setUser() {
-    this.user = this.helper.getUser();
+    // @ts-ignore
+    this.user = jwtDecode(localStorage.getItem('token')) as User;
+    this.helper.setUser(this.user);
     this.goToProfile();
   }
 
