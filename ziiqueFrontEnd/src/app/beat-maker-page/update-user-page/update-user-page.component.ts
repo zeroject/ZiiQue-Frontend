@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from '../../../services/http.service';
 
@@ -13,7 +14,7 @@ export class UpdateUserPageComponent implements OnInit {
   strengthvalue: number = 0;
 
 
-  constructor(private snackbar: MatSnackBar, private http: HttpService) { }
+  constructor(private snackbar: MatSnackBar, private http: HttpService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +26,7 @@ export class UpdateUserPageComponent implements OnInit {
   async updatePassword() {
     if (this.strengthvalue >= 2) {
       if (this.password == this.cpassword) {
+        this.dialog.closeAll();
         this.http.updatePassword(this.password);
       }
       else {

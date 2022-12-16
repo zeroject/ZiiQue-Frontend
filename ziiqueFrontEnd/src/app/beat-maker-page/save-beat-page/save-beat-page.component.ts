@@ -49,7 +49,7 @@ export class SaveBeatPageComponent implements OnInit {
       title: this.title,
       summary: this.summary,
       beatString: this.helper.getBeatString(),
-      userEmail: this.http.email
+      userEmail: this.helper.getUser().email
     };
     if (this.isUpdating === true) {
       this.dialog.closeAll();

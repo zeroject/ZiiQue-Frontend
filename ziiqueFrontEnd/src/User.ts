@@ -8,3 +8,8 @@ export interface UserDTO {
   username: string;
   password: string;
 }
+
+export interface LoginDTO {
+  username_Email: string;
+  password: string;
+}

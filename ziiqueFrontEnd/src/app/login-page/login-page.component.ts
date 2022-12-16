@@ -4,6 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import * as EmailValidator from "email-validator";
 import {Router} from "@angular/router";
 import {empty} from "rxjs";
+import { LoginDTO, UserDTO } from '../../User';
 
 
 @Component({
@@ -12,16 +13,13 @@ import {empty} from "rxjs";
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  password: any;
-  Username_Email: any;
-  cpassword: any;
-  strengthvalue: any;
-  isEmailTrue: any;
-  email: any;
+  password: string = "";
+  Username_Email: string = "";
+  cpassword: string = "";
+  strengthvalue: number = 0;
+  isEmailTrue: boolean = false;
+  email: string = "";
   HttpStatus: number | void;
-  x: any;
-  y: any;
-  z: any;
   formbox: any;
   loading: any;
 
@@ -45,9 +43,9 @@ export class LoginPageComponent implements OnInit {
     }
     else if (!this.password) {
       this.snackbar.open("Remember to enter your password", "Ok")
-    } else{
-      let dto = {
-        Username_Email: this.Username_Email,
+    } else {
+      let dto: LoginDTO = {
+        username_Email: this.Username_Email,
         password: this.password
 
       }
@@ -73,8 +71,8 @@ export class LoginPageComponent implements OnInit {
   async createUser() {
     if(this.strengthvalue >= 2){
       if(this.password == this.cpassword){
-        if(EmailValidator.validate(this.email)){
-          let dto = {
+        if (EmailValidator.validate(this.email)) {
+          let dto: UserDTO = {
             username: this.Username_Email,
             email: this.email,
             password: this.password,
@@ -140,11 +138,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   SwitchLogin(){
-    var x = document.getElementById("login");
-    var y = document.getElementById("register");
-    var z = document.getElementById("btn");
-    var b = document.getElementById("btn-login");
-    var bt = document.getElementById("btn-register");
+    let x = document.getElementById("login");
+    let y = document.getElementById("register");
+    let z = document.getElementById("btn");
+    let b = document.getElementById("btn-login");
+    let bt = document.getElementById("btn-register");
     // @ts-ignore
     x.style.left = "50px";
     // @ts-ignore
@@ -158,11 +156,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   SwitchRegister() {
-    var x = document.getElementById("login");
-    var y = document.getElementById("register");
-    var z = document.getElementById("btn");
-    var b = document.getElementById("btn-login");
-    var bt = document.getElementById("btn-register");
+    let x = document.getElementById("login");
+    let y = document.getElementById("register");
+    let z = document.getElementById("btn");
+    let b = document.getElementById("btn-login");
+    let bt = document.getElementById("btn-register");
     // @ts-ignore
     x.style.left = "-400px";
     // @ts-ignore
