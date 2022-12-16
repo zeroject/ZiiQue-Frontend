@@ -5,11 +5,18 @@ import { User } from '../User';
   providedIn: 'root'
 })
 export class HelperService {
-  beatString: string = "";
   user: User = {
     email: "",
     username_Email: "",
   };
+  isUpdating: boolean = false;
+
+  id: number = 1;
+  title: string = "";
+  summary: string = "";
+  beatString: string = "";
+
+
 
   constructor() { }
 
@@ -27,5 +34,37 @@ export class HelperService {
 
   getUser() {
     return this.user;
+  }
+
+  setUpdating(isUpdating: boolean) {
+    this.isUpdating = isUpdating;
+  }
+
+  getUpdating() {
+    return this.isUpdating;
+  }
+
+  getId() {
+    return this.id;
+  }
+
+  setId(id: number) {
+    this.id = id
+  }
+
+  setTitle(title: string) {
+    this.title = title;
+  }
+
+  getTitle() {
+    return this.title;
+  }
+
+  setSummary(summary: string) {
+    this.summary = summary;
+  }
+
+  getSummary() {
+    return this.summary;
   }
 }

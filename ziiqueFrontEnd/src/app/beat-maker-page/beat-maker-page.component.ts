@@ -71,17 +71,28 @@ export class BeatMakerPageComponent implements OnInit {
   //opens a popup for saving beats and sends the beatstring to the helper service
   saveBeat() {
     this.helper.setBeatString(this.convertNodeToSeqStr().toString().replace(/,/g, ""));
+    this.helper.setTitle("");
+    this.helper.setSummary("");
+    this.helper.setUpdating(false);
 
     this.dialog.open(SaveBeatPageComponent, {
       height: '240px',
       width: '25%',
     });
-    this.loadBeats();
   }
 
   //updates beats in the database
   async updateBeat(beatDTO: BeatDTO) {
-    await this.http.updateBeat(beatDTO);
+    this.helper.setBeatString(this.convertNodeToSeqStr().toString().replace(/,/g, ""));
+    this.helper.setId(beatDTO.id)
+    this.helper.setTitle(beatDTO.title);
+    this.helper.setSummary(beatDTO.summary);
+    this.helper.setUpdating(true);
+
+    this.dialog.open(SaveBeatPageComponent, {
+      height: '240px',
+      width: '25%',
+    });
   }
 
   //deleltes a beat from the database
