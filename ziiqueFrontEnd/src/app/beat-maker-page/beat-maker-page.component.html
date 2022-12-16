@@ -29,8 +29,8 @@
                 <p class="credentials">{{this.user.username_Email}}</p> 
                 <p class="text">Email</p>
                 <p class="credentials">{{this.user.email}}</p>
-                <!--<button id="profileUpdate" mat-raised-button>Save Changes</button>-->
-                <button id="profileDelete" mat-raised-button (click)="deletePopUp()">Delete Profile</button>
+                <button id="profileBtns" mat-raised-button (click)="updatePassword()">Change Password</button>
+                <button id="profileBtns" mat-raised-button (click)="deletePopUp()">Delete Profile</button>
             </div>
             <div class="burgerDivPages" id="beatsPage">
                 <mat-expansion-panel id="beat" *ngFor="let beat of beats">

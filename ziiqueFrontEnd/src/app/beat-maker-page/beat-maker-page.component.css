@@ -256,11 +256,11 @@ mat-button-toggle-group {
     z-index: 100;
 }
 
-#profileDelete {
-    bottom: 10px;
+#profileBtns {
+    top: 20px;
     left: 5px;
+    right: 5px;
     width: 49%;
-    position: absolute;
 }
 
 #profileUpdate {

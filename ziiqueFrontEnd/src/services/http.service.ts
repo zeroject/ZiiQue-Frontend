@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from "axios";
 import * as https from "https";
 import jwtDecode from "jwt-decode";
-import { User } from "../User"
+import { User, UserDTO } from "../User"
 import {environment} from "../environments/environment";
 import {Router} from "@angular/router";
 import { HelperService } from './helper.service';
@@ -22,8 +22,8 @@ export const customAxios = axios.create(
   providedIn: 'root'
 })
 export class HttpService {
-  username_Email: any;
-  email: any;
+  username: string = "";
+  email: string = "";
 
 
   constructor(private router: Router, private helper: HelperService) {
@@ -36,13 +36,13 @@ export class HttpService {
     localStorage.setItem('token', httpResult.data);
     let t = jwtDecode(httpResult.data) as User;
     this.helper.setUser(t);
-    this.username_Email = t.username_Email;
+    this.username = t.username_Email;
     this.email = t.email;
     await this.router.navigate(['./BeatMaker'])
   }
 
   // User Functions
-  async createUser(Dto: { username: any, password: any, email: any }) {
+  async createUser(Dto: { username: string, password: string, email: string }) {
     const httpResult = await customAxios.post("User/createUser", Dto).then()
     {
       return httpResult.status
@@ -54,11 +54,12 @@ export class HttpService {
     await this.router.navigate(['./Login'])
   }
 
-  async updateUser(username: any, email: any) {
-    let user: User = { email: email, username_Email: username }
-    const httpResult = await customAxios.put("User/updateUser", user).then()
+  async updatePassword(pass: string) {
+    let user: UserDTO = { email: this.email, username: this.username, password: pass }
+    const httpResult = await customAxios.put("User/updatePassword", user).then()
     {
-      return httpResult.status;
+      await this.router.navigate(['./Login'])
+      return httpResult.status
     }
   }
 

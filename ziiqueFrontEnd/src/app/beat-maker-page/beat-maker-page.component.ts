@@ -9,6 +9,7 @@ import { BeatDTO } from '../../BeatDTO';
 import { User } from '../../User';
 import { HttpService } from '../../services/http.service';
 import { DeleteProfilePopupComponent } from './delete-profile-popup/delete-profile-popup.component';
+import { UpdateUserPageComponent } from './update-user-page/update-user-page.component';
 
 
 let names = ["A","B","C","D","E"]
@@ -38,7 +39,6 @@ export class BeatMakerPageComponent implements OnInit {
 
 
   constructor(private dialog: MatDialog, private helper: HelperService, private http: HttpService) {
-
   }
 
   ngOnInit() {
@@ -66,6 +66,14 @@ export class BeatMakerPageComponent implements OnInit {
       document.getElementById("burgerDivMaster").style.zIndex = "-100";
       this.isOpen = false;
     }
+  }
+
+  //Opens a popup for changing a users password
+  updatePassword() {
+    this.dialog.open(UpdateUserPageComponent, {
+      height: '280px',
+      width: '25%',
+    });
   }
 
   //opens a popup for saving beats and sends the beatstring to the helper service

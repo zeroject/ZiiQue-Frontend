@@ -36,10 +36,10 @@
         <mat-form-field class="input-field" required>
           <input matInput ng placeholder="Username" type="text" [(ngModel)]="Username_Email">
         </mat-form-field>
-        <mat-form-field class="input-field" aria-placeholder="Email" required>
+        <mat-form-field class="input-field" required>
           <input matInput ng placeholder="Email" type="text" [(ngModel)]="email">
         </mat-form-field>
-        <mat-form-field class="input-field" aria-placeholder="Email" required>
+        <mat-form-field class="input-field" required>
           <input matInput ng placeholder="Password" type="password" [(ngModel)]="password">
         </mat-form-field>
         <password-strength-meter class="password-Strength" [password]="password" (strengthChange)="strength($event)"></password-strength-meter>

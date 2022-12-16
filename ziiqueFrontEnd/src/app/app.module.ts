@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SaveBeatPageComponent } from './beat-maker-page/save-beat-page/save-beat-page.component';
 import { HttpService } from '../services/http.service';
 import { DeleteProfilePopupComponent } from './beat-maker-page/delete-profile-popup/delete-profile-popup.component';
+import { UpdateUserPageComponent } from './beat-maker-page/update-user-page/update-user-page.component';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
     LoginPageComponent,
     BeatMakerPageComponent,
     SaveBeatPageComponent,
-    DeleteProfilePopupComponent
+    DeleteProfilePopupComponent,
+    UpdateUserPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
