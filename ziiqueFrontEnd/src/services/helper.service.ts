@@ -11,7 +11,7 @@ export class HelperService {
   };
   _isUpdating: boolean = false;
 
-  _id: number = 1;
+  _id: number = 0;
   _title: string = "";
   _summary: string = "";
   _beatString: string = "";

@@ -81,7 +81,7 @@ export class LoginPageComponent implements OnInit {
             password: this._password,
           }
           // @ts-ignore
-          this.loading.style.opacity = "100";
+          this._loading.style.opacity = "100";
           // @ts-ignore
           this._formbox.style.webkitFilter = "blur(1rem)"
           this._loading.style.zIndex = "10";
