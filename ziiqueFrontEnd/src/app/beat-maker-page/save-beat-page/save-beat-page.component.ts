@@ -11,53 +11,54 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./save-beat-page.component.css']
 })
 export class SaveBeatPageComponent implements OnInit {
-  id: number = 1;
-  title: string = "";
-  summary: string = "";
-  isUpdating: boolean = false;
-  saveState: string = "";
+  _id: number = 1;
+  _title: string = "";
+  _summary: string = "";
+  _isUpdating: boolean = false;
+  _saveState: string = "";
 
 
-  constructor(private http: HttpService, private snackbar: MatSnackBar, private helper: HelperService, private dialog: MatDialog) {
+  constructor(private http_: HttpService, private snackbar_: MatSnackBar, private helper_: HelperService, private dialog_: MatDialog) {
   }
 
   ngOnInit(): void {
     this.setupPopup();
   }
 
+  /// function that setups the popup window for either saving or updating a beat
   setupPopup() {
-    this.id = this.helper.getId();
-    this.title = this.helper.getTitle();
-    this.summary = this.helper.getSummary();
-    this.isUpdating = this.helper.getUpdating();
+    this._id = this.helper_.getId();
+    this._title = this.helper_.getTitle();
+    this._summary = this.helper_.getSummary();
+    this._isUpdating = this.helper_.getUpdating();
 
-    if (this.isUpdating === true) {
-      this.saveState = "Update";
+    if (this._isUpdating === true) {
+      this._saveState = "Update";
     }
     else {
-      this.saveState = "Save";
+      this._saveState = "Save";
     }
   }
 
-  //function that saves the beat you made to the database
+  /// function that saves the beat you made to the database
   async saveBeat() {
-    if (!this.title) {
-      this.snackbar.open("Remember to enter a title for your beat", "Ok")
+    if (!this._title) {
+      this.snackbar_.open("Remember to enter a title for your beat", "Ok")
     }
     let beatDTO: BeatDTO = {
-      id: this.id,
-      title: this.title,
-      summary: this.summary,
-      beatString: this.helper.getBeatString(),
-      userEmail: this.helper.getUser().email
+      id: this._id,
+      title: this._title,
+      summary: this._summary,
+      beatString: this.helper_.getBeatString(),
+      userEmail: this.helper_.getUser().email
     };
-    if (this.isUpdating === true) {
-      this.dialog.closeAll();
-      await this.http.updateBeat(beatDTO);
+    if (this._isUpdating === true) {
+      this.dialog_.closeAll();
+      await this.http_.updateBeat(beatDTO);
     }
     else {
-      this.dialog.closeAll();
-      await this.http.createBeat(beatDTO);
+      this.dialog_.closeAll();
+      await this.http_.createBeat(beatDTO);
     }
     
   }

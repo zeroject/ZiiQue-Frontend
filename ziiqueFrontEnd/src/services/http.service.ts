@@ -75,6 +75,7 @@ export class HttpService {
   /// http request to create a beat in the database which takes a BeatDTO as a parameter
   async createBeat(beatDTO_: BeatDTO) {
     beatDTO_.userEmail = this.helper_.getUser().username_Email;;
+    console.log(beatDTO_);
     const httpResult = await customAxios.post('Beat/createBeat', beatDTO_ );
     return httpResult.data
   }

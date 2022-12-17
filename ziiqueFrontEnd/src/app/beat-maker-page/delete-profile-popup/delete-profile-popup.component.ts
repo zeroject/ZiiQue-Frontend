@@ -9,18 +9,20 @@ import { HttpService } from '../../../services/http.service';
 })
 export class DeleteProfilePopupComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private http: HttpService) { }
+  constructor(public dialog_: MatDialog, private http_: HttpService) { }
 
   ngOnInit(): void {
   }
 
+  /// function which requsts a function in http service to delete a user
   deleteProfile() {
-    this.http.deleteUser()
-    this.dialog.closeAll();
+    this.http_.deleteUser()
+    this.dialog_.closeAll();
   }
 
+  /// function which closes the popup
   goBack() {
-    this.dialog.closeAll();
+    this.dialog_.closeAll();
   }
 
 }

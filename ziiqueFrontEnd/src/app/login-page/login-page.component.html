@@ -23,10 +23,10 @@
     <div id="login" class="input-group">
       <div>
         <mat-form-field class="input-field" required>
-          <input matInput ng placeholder="Username or Email" type="text" [(ngModel)]="Username_Email">
+          <input matInput ng placeholder="Username or Email" type="text" [(ngModel)]="_Username_Email">
         </mat-form-field>
         <mat-form-field class="input-field" required>
-          <input matInput ng placeholder="Password" type="password" [(ngModel)]="password">
+          <input matInput ng placeholder="Password" type="password" [(ngModel)]="_password">
         </mat-form-field>
       </div>
       <button class="submit-btn" mat-raised-button (click)="Submit()">Log In</button>
@@ -34,17 +34,17 @@
     <div id="register" class="input-group">
       <div>
         <mat-form-field class="input-field" required>
-          <input matInput ng placeholder="Username" type="text" [(ngModel)]="Username_Email">
+          <input matInput ng placeholder="Username" type="text" [(ngModel)]="_Username_Email">
         </mat-form-field>
         <mat-form-field class="input-field" required>
-          <input matInput ng placeholder="Email" type="text" [(ngModel)]="email">
+          <input matInput ng placeholder="Email" type="text" [(ngModel)]="_email">
         </mat-form-field>
         <mat-form-field class="input-field" required>
-          <input matInput ng placeholder="Password" type="password" [(ngModel)]="password">
+          <input matInput ng placeholder="Password" type="password" [(ngModel)]="_password">
         </mat-form-field>
-        <password-strength-meter class="password-Strength" [password]="password" (strengthChange)="strength($event)"></password-strength-meter>
+        <password-strength-meter class="password-Strength" [password]="_password" (strengthChange)="strength($event)"></password-strength-meter>
         <mat-form-field class="input-field" aria-placeholder="Email" required>
-          <input matInput ng placeholder="Confrim Password" type="password" [(ngModel)]="cpassword">
+          <input matInput ng placeholder="Confrim Password" type="password" [(ngModel)]="_cpassword">
         </mat-form-field>
       </div>
       <button class="submit-btn" mat-raised-button (click)="createUser()">Register</button>

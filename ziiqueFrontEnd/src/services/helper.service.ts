@@ -5,66 +5,66 @@ import { User } from '../User';
   providedIn: 'root'
 })
 export class HelperService {
-  user: User = {
+  _user: User = {
     email: "",
     username_Email: "",
   };
-  isUpdating: boolean = false;
+  _isUpdating: boolean = false;
 
-  id: number = 1;
-  title: string = "";
-  summary: string = "";
-  beatString: string = "";
+  _id: number = 1;
+  _title: string = "";
+  _summary: string = "";
+  _beatString: string = "";
 
 
-
+  /// All functions in this class are primarily used for parsing data between components and a re all getters and setters.
   constructor() { }
 
-  setBeatString(beatString: string) {
-    this.beatString = beatString;
+  setBeatString(beatString_: string) {
+    this._beatString = beatString_;
   }
 
   getBeatString() {
-    return this.beatString;
+    return this._beatString;
   }
 
-  setUser(user: User) {
-    this.user = user;
+  setUser(user_: User) {
+    this._user = user_;
   }
 
   getUser() {
-    return this.user;
+    return this._user;
   }
 
-  setUpdating(isUpdating: boolean) {
-    this.isUpdating = isUpdating;
+  setUpdating(isUpdating_: boolean) {
+    this._isUpdating = isUpdating_;
   }
 
   getUpdating() {
-    return this.isUpdating;
+    return this._isUpdating;
   }
 
   getId() {
-    return this.id;
+    return this._id;
   }
 
-  setId(id: number) {
-    this.id = id
+  setId(id_: number) {
+    this._id = id_
   }
 
-  setTitle(title: string) {
-    this.title = title;
+  setTitle(title_: string) {
+    this._title = title_;
   }
 
   getTitle() {
-    return this.title;
+    return this._title;
   }
 
-  setSummary(summary: string) {
-    this.summary = summary;
+  setSummary(summary_: string) {
+    this._summary = summary_;
   }
 
   getSummary() {
-    return this.summary;
+    return this._summary;
   }
 }

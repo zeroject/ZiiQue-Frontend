@@ -26,14 +26,14 @@
             </mat-button-toggle-group>
             <div class="burgerDivPages" id="profilePage">
                 <p class="text">Username</p>
-                <p class="credentials">{{this.user.username_Email}}</p> 
+                <p class="credentials">{{this._user.username_Email}}</p> 
                 <p class="text">Email</p>
-                <p class="credentials">{{this.user.email}}</p>
+                <p class="credentials">{{this._user.email}}</p>
                 <button id="profileBtns" mat-raised-button (click)="updatePassword()">Change Password</button>
                 <button id="profileBtns" mat-raised-button (click)="deletePopUp()">Delete Profile</button>
             </div>
             <div class="burgerDivPages" id="beatsPage">
-                <mat-expansion-panel id="beat" *ngFor="let beat of beats">
+                <mat-expansion-panel id="beat" *ngFor="let beat of _beats">
                     <mat-expansion-panel-header>{{ beat.title }}</mat-expansion-panel-header>
                     <h2>{{ beat.summary }}</h2>
                     <button class="expansionButtons" mat-raised-button (click)="loadBeat(beat)">Load Beat</button>
@@ -47,13 +47,13 @@
     <div id="beatBoard">
         <div class="play">
             <button mat-raised-button (click)="play()" class="btn-play">
-                <img src="{{this.imgPath}}" id="play-img">
+                <img src="{{this._imgPath}}" id="play-img">
             </button>
         </div>
         <div class="BPM">
             <mat-form-field appearance="outline" class="BPM-Input">
                 <mat-label>BPM</mat-label>
-                <input matInput type="number" [(ngModel)]="bpm">
+                <input matInput type="number" [(ngModel)]="_bpm">
             </mat-form-field>
         </div>
         <div class="save">
@@ -61,18 +61,18 @@
                 Save Beat
             </button>
         </div>
-        <mat-card id="intBoard" *ngFor="let instruments of instrumentList; index as i;">
+        <mat-card id="intBoard" *ngFor="let instruments of _instrumentList; index as i;">
             <button id="demoBton"
                     mat-raised-button
-                    *ngIf="demoNode[i]"
+                    *ngIf="_demoNode[i]"
                     [ngClass]="{
-     'dem0': demoNode[i].sound.includes('A'),
-     'dem1': demoNode[i].sound.includes('B'),
-     'dem2': demoNode[i].sound.includes('C'),
-     'dem3': demoNode[i].sound.includes('D'),
-     'dem4': demoNode[i].sound.includes('E')
-     }" (click)="playDemo(demoNode[i])">
-                {{demoNode[i].sound}}
+     'dem0': _demoNode[i].sound.includes('A'),
+     'dem1': _demoNode[i].sound.includes('B'),
+     'dem2': _demoNode[i].sound.includes('C'),
+     'dem3': _demoNode[i].sound.includes('D'),
+     'dem4': _demoNode[i].sound.includes('E')
+     }" (click)="playDemo(_demoNode[i])">
+                {{_demoNode[i].sound}}
             </button>
             <button id="beatBtn"
                     mat-raised-button

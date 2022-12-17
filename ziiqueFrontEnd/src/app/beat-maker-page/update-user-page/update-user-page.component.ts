@@ -9,32 +9,34 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./update-user-page.component.css']
 })
 export class UpdateUserPageComponent implements OnInit {
-  password: string = "";
-  cpassword: string = "";
-  strengthvalue: number = 0;
+  _password: string = "";
+  _cpassword: string = "";
+  _strengthvalue: number = 0;
 
 
-  constructor(private snackbar: MatSnackBar, private http: HttpService, private dialog: MatDialog) { }
+  constructor(private snackbar_: MatSnackBar, private http_: HttpService, private dialog_: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  /// functtion that updates the strength meter each time a change is made in the input for a new password
   strength(event: any) {
-    this.strengthvalue = event
+    this._strengthvalue = event
   }
 
+  /// function to update the password which checks if the inputs are filled out and if the strength of the pasword is good enough
   async updatePassword() {
-    if (this.strengthvalue >= 2) {
-      if (this.password == this.cpassword) {
-        this.dialog.closeAll();
-        this.http.updatePassword(this.password);
+    if (this._strengthvalue >= 2) {
+      if (this._password == this._cpassword) {
+        this.dialog_.closeAll();
+        this.http_.updatePassword(this._password);
       }
       else {
-        this.snackbar.open("Your passwords dont match", "Ok")
+        this.snackbar_.open("Your passwords dont match", "Ok")
       }
     }
     else {
-      this.snackbar.open("Your passwords is not strong enough", "Ok")
+      this.snackbar_.open("Your passwords is not strong enough", "Ok")
     }
 
   }
