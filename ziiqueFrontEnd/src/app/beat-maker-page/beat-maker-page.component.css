@@ -1,3 +1,9 @@
+body{
+    position: relative;
+    height: calc(100% - 95px);
+
+}
+
 .menu{
   position: absolute;
   top: 20px;
@@ -60,7 +66,6 @@
 }
 
 .header {
-  margin-bottom: 60px;
   z-index: 99;
   left: 0px;
   top: 0px;
@@ -107,7 +112,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -100;
+  z-index: -99;
 }
 
 .green{
@@ -124,8 +129,8 @@
   border-radius: 0px;
 }
 
-#beatBoard{
-  top: 100px;
+#beatBoard {
+  top: 140px;
   position: relative;
   padding: 5px;
   display: grid;
@@ -134,7 +139,7 @@
   row-gap: 0px;
   width: fit-content;
   margin: auto;
-  z-index: 100;
+  z-index: 98;
 }
 
 #intBoard{
@@ -192,4 +197,95 @@
   background-color: #F1820E;
   border-color: coral;
   box-shadow: 0 0 5px salmon;
+}
+
+mat-button-toggle-group {
+  top: 10px;
+  left: 5px;
+  right: 5px;
+  width: calc(100% - 10px);
+  margin: auto;
+  position: relative;
+  background: radial-gradient(circle, rgba(120,16,210,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.navButton {
+  width: 50%;
+  border-width: 5px;
+  margin: 4px;
+  border-radius: 5px;
+  font-weight: normal;
+  font-size: 20px;
+  background-color: #6d6969;
+}
+
+#burgerDivMaster {
+  position: absolute;
+  right: 0px;
+  z-index: -100;
+  height: calc(100% + 5px);
+  background-color: #484444;
+  width: 30%;
+  top: 0px;
+  bottom: 0px;
+}
+
+#burgerDivSlave {
+  position: relative;
+  height: 100%;
+  bottom: 0px;
+  margin: 4px;
+}
+
+.burgerDivPages {
+  position: absolute;
+  top: 110px;
+  right: 0px;
+  left: 0px;
+  bottom: 20px;
+  background-color: #5a5757;
+  border-radius: 5px;
+  padding-top: 5px;
+}
+
+#profilePage {
+    z-index: 100;
+}
+
+#beatsPage {
+    z-index: 100;
+}
+
+#profileBtns {
+    top: 20px;
+    left: 5px;
+    right: 5px;
+    width: 49%;
+}
+
+#profileUpdate {
+    bottom: 10px;
+    right: 5px;
+    width: 49%;
+    position: absolute;
+}
+
+.expansionButtons{
+
+}
+
+#beat{
+    margin: 4px;
+}
+
+.text {
+    font-size: 40px;
+    margin-top: 10px;
+    background-color: #6d6969;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.credentials{
+    font-size: 25px;
 }
