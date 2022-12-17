@@ -1,0 +1,39 @@
+body{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+#strengthMeter {
+  border: solid;
+  border-color: #5a5757;
+  background-color: #5a5757;
+  border-width: 3px;
+  border-radius: 5px;
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  left: 0px;
+}
+
+.passInput {
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  margin: 0px;
+  position: absolute;
+}
+
+.confirmPassInput {
+  bottom: 50px;
+  left: 0px;
+  right: 0px;
+  margin: 0px;
+  position: absolute;
+}
+
+.saveBtn{
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+}

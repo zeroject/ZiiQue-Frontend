@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import axios from "axios";
 import * as https from "https";
 import jwtDecode from "jwt-decode";
-import { User } from "../User"
+import { LoginDTO, User, UserDTO } from "../User"
 import {environment} from "../environments/environment";
 import {Router} from "@angular/router";
-import { BeatDTO } from '../app/beat-maker-page/profile-page/BeatDTO';
+import { HelperService } from './helper.service';
+import { BeatDTO } from '../BeatDTO';
 
 
 export const customAxios = axios.create(
@@ -21,67 +22,75 @@ export const customAxios = axios.create(
   providedIn: 'root'
 })
 export class HttpService {
-  username_Email: any;
-  email: any;
-  twoFA: any;
+  _username: string = "";
+  _email: string = "";
 
 
-  constructor(private router: Router) {
+  constructor(private router_: Router, private helper_: HelperService) {
 
   }
 
-  //Login Function
-  async login(dto: any) {
-    const httpResult = await customAxios.post('Login/login', dto);
+  ///Login function which takes a loginDTO as a parameter, aswell as sets the token from the api in the localstorage to use for authorization
+  async login(dto_: LoginDTO) {
+    const httpResult = await customAxios.post('Login/login', dto_);
     localStorage.setItem('token', httpResult.data);
     let t = jwtDecode(httpResult.data) as User;
-    this.username_Email = t.username_Email;
-    this.email = t.email;
-    this.twoFA = t.twoFA.valueOf();
-    await this.router.navigate(['./BeatMaker'])
+    this.helper_.setUser(t);
+    this._username = t.username_Email;
+    this._email = t.email;
+    await this.router_.navigate(['./BeatMaker'])
   }
 
-  // User Functions
-  async createUser(Dto: { username: any, password: any, email: any, is2FA: any }) {
-    const httpResult = await customAxios.post("User/createUser", Dto).then()
+  /// http request to create a user which takes a userDTO as a parameter and gives back a status
+  async createUser(Dto_: UserDTO) {
+    const httpResult = await customAxios.post("User/createUser", Dto_).then()
     {
       return httpResult.status
     }
   }
 
-  async deleteUser(email: any) {
-    const httpResult = await customAxios.delete("User/deleteUser", email);
+  /// http request to delete user
+  async deleteUser() {
+    await customAxios.delete("User/deleteUser/" + this.helper_.getUser().email);
+    await this.router_.navigate(['./Login'])
   }
 
-  async updateUser(username: any, email: any, twoFA: any) {
-    let user: User = { email: email, twoFA: twoFA, username_Email: username }
-    const httpResult = await customAxios.put("User/updateUser", user).then()
+  /// http request to update password which takes a string as a parameter
+  async updatePassword(pass_: string) {
+    let user: UserDTO = { email: this.helper_.getUser().username_Email, username: this._username, password: pass_ }
+    const httpResult = await customAxios.put("User/updatePassword", user).then()
     {
-      return httpResult.status;
+      await this.router_.navigate(['./Login'])
+      return httpResult.status
     }
   }
 
-  // Beat Functions
+  /// http request to get beats assigned to a user
   async getBeats() {
-    const httpResult = await customAxios.get('Beat/getBeats', this.email);
+    let userEmail_: string = this.helper_.getUser().username_Email;
+    const httpResult = await customAxios.get('Beat/getBeats/' + userEmail_);
     return httpResult.data
   }
 
-  async createBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
-    const httpResult = await customAxios.post('Beat/createBeat', beatDTO);
+  /// http request to create a beat in the database which takes a BeatDTO as a parameter
+  async createBeat(beatDTO_: BeatDTO) {
+    beatDTO_.userEmail = this.helper_.getUser().username_Email;;
+    console.log(beatDTO_);
+    const httpResult = await customAxios.post('Beat/createBeat', beatDTO_ );
     return httpResult.data
   }
 
-  async updateBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
-    const httpResult = await customAxios.put('Beat/updateBeat', beatDTO);
+  /// http request to update a beat in the database which takes a BeatDTO as a parameter
+  async updateBeat(beatDTO_: BeatDTO) {
+    beatDTO_.userEmail = this.helper_.getUser().username_Email;;
+    const httpResult = await customAxios.put('Beat/updateBeat', beatDTO_);
     return httpResult.data
   }
-  
-  async deleteBeat(beatDTO: BeatDTO) {
-    beatDTO.userEmail = this.email;
-    const httpResult = await customAxios.delete('Beat/deleteBeat', { data: beatDTO });
+
+  /// http request to delete a beat from the database which takes a beatDTO as a parameter
+  async deleteBeat(beatDTO_: BeatDTO) {
+    beatDTO_.userEmail = this.helper_.getUser().username_Email;;
+    const httpResult = await customAxios.delete('Beat/deleteBeat', { data: beatDTO_ });
     return httpResult.data
   }
 }

@@ -1,0 +1,12 @@
+<body>
+    <mat-form-field class="passInput" appearance="outline">
+        <mat-label>New Password</mat-label>
+        <input matInput type="password" [(ngModel)]="_password">
+    </mat-form-field>
+    <password-strength-meter id="strengthMeter" [password]="_password" (strengthChange)="strength($event)"></password-strength-meter>
+    <mat-form-field class="confirmPassInput" appearance="outline">
+        <mat-label>Confirm New Password</mat-label>
+        <input matInput type="password" [(ngModel)]="_cpassword">
+    </mat-form-field>
+    <button class="saveBtn" mat-raised-button (click)="updatePassword()">Confirm</button>
+</body>
