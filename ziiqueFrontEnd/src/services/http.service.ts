@@ -51,7 +51,7 @@ export class HttpService {
 
   /// http request to delete user
   async deleteUser() {
-    await customAxios.delete("User/deleteUser/" + this.helper_.getUser().email);
+    await customAxios.delete("User/deleteUser/" + this.helper_.getUser().username_Email);
     await this.router_.navigate(['./Login'])
   }
 
