@@ -11,7 +11,7 @@ import { BeatDTO } from '../BeatDTO';
 
 export const customAxios = axios.create(
   {
-    baseURL: 'https://ziique-beatmaker-api.azurewebsites.net/api',
+    baseURL: 'https://localhost:7003/api',
     headers: {
       Authorization: `bearer ${localStorage.getItem('token')}`
     }
