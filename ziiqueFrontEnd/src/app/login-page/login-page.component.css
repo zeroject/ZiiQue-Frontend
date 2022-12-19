@@ -159,6 +159,16 @@
   animation-iteration-count: infinite;
 }
 
+.header
+{
+  display: grid;
+  place-items: center;
+  font-size: x-large;
+  color: #ED121F;
+  text-shadow: 2px 2px black;
+  font-family: Bahnschrift, system-ui
+}
+
 @keyframes icc {
   0%{
     filter: hue-rotate(0deg);
