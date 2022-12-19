@@ -11,7 +11,7 @@ import { BeatDTO } from '../BeatDTO';
 
 export const customAxios = axios.create(
   {
-    baseURL: 'https://ziique-beatmaker-api.azurewebsites.net/api',
+    baseURL: 'https://localhost:7003/api',
     headers: {
       Authorization: `bearer ${localStorage.getItem('token')}`
     }
@@ -51,7 +51,7 @@ export class HttpService {
 
   /// http request to delete user
   async deleteUser() {
-    await customAxios.delete("User/deleteUser/" + this.helper_.getUser().email);
+    await customAxios.delete("User/deleteUser/" + this.helper_.getUser().username_Email);
     await this.router_.navigate(['./Login'])
   }
 
