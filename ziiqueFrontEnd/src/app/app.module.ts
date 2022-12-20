@@ -24,7 +24,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   { path: 'Login', component: LoginPageComponent },
-  { path: 'BeatMaker', component: BeatMakerPageComponent },
+  { path: 'BeatMaker', component: BeatMakerPageComponent, canActivate: [AuthguardService] },
   { path: '**', redirectTo:'Login'},
 ];
 
